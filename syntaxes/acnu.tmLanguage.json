@@ -1,0 +1,802 @@
+{
+	"name": "acnu",
+	"scopeName": "source.acnu",
+	"patterns": [{
+			"include": "#comments"
+		},
+		{
+			"include": "#operators-all"
+		},
+		{
+			"include": "#struct-declaration"
+		},
+		{
+			"include": "#declare-variable"
+		},
+		{
+			"include": "#start-end-sub-code"
+		},
+		{
+			"include": "#macro-endmacro"
+		},
+		{
+			"include": "#statements"
+		},
+		{
+			"include": "#array"
+		},
+		{
+			"include": "#struct"
+		},
+		{
+			"include": "#data-types"
+		},
+		{
+			"include": "#macro-call"
+		},
+		{
+			"include": "#variable"
+		}
+	],
+	"repository": {
+		"data-types": {
+			"patterns": [{
+					"include": "#string"
+				},
+				{
+					"include": "#hexadecimal"
+				},
+				{
+					"include": "#number"
+				}
+			]
+		},
+		"string": {
+			"name": "string.quoted.double.acnu",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [{
+				"name": "constant.character.escape.acnu",
+				"match": "\\\\[\\S]"
+			}]
+		},
+		"number": {
+			"match": "[-]?[0-9]+\\.{0,1}[0-9]*",
+			"name": "constant.numeric.acnu"
+		},
+		"hexadecimal": {
+			"match": "\\s*0[xX][0-9a-fA-F]+\\s*",
+			"name": "constant.numeric.acnu"
+		},
+		"constant": {
+			"match": "(?i)(cnst)(\\()(.*?)(\\))",
+			"captures": {
+				"1": {
+					"name": "keyword.other.constant.acnu"
+				},
+				"2": {
+					"name": "punctuation.paren.open.acnu"
+				},
+				"3": {
+					"patterns": [{
+						"include": "#constant-words"
+					}]
+				},
+				"4": {
+					"name": "punctuation.paren.close.acnu"
+				}
+			}
+		},
+		"constant-words": {
+			"match": "(?i)(2pi|3pi2|5axes|abs|apt_mvt_polar_all|apt_mvt_polar_rapid|apt_mvt_std|apt_polar_axis_apt_ref_x|apt_polar_axis_apt_ref_y|apt_polar_axis_apt_ref_z|apt_polar_axis_setup_x|apt_polar_axis_setup_y|apt_polar_axis_setup_z|apt_word|axislinkedinfostruct|cclw|circular_comp|circ_3pts1|circ_3pts2|circ_vector_center|circ_vector_radius|clw|corr_itn|corr_lx|corr_lx2|corr_lx3|corr_lx4|corr_lx5|corr_ly|corr_ly2|corr_ly3|corr_ly4|corr_ly5|corr_lz|corr_lz2|corr_lz3|corr_lz4|corr_lz5|corr_radius|corr_radius2|corr_radius3|corr_radius4|corr_radius5|fcub|flin|fnorm|headinfostruct|head_motor|head_mount|in|inc|inch|inch_mn|inch_tour|int|in_out|left|like_iso|lin|linear_comp|mm|mm_mn|mm_tour|ncflag|ncrecord|ncregister|ncspy|ncstatus|newlin|none|null|nurbs|nurbs_deg|nurbs_f|nurbs_k|nurbs_ligne|nurbs_max|nurbs_r|nurbs_type_xyz|nurbs_type_xyz2|nurbs_type_xyzabc|nurbs_x|nurbs_x2|nurbs_y|nurbs_y2|nurbs_z|nurbs_z2|off|off_pos|on|optitool_file_off|optitool_file_on|optitool_file_show|optitool_off|optitool_on|optitool_show|out|out_in|pi|pi2|pi3|pi4|pi6|plan_impossible|plan_interpo|plan_xy|plan_yz|plan_zx|poly|poly_type_xyz|poly_type_xyz2|real|right|rnd_chf|rnd_chr|rnd_off|rnd_once_chf|rnd_once_chr|rnd_once_rnd|rnd_rnd|same|shape|shape_inside|shape_outside|space|spindle_motor|string|string_to_end|sysproginfo|sysprogreginfo|tableinfostruct|table_motor|units_mn|units_tour|v_l|v_ls)",
+			"name": "constant.language.acnu"
+		},
+		"start-end-sub-code": {
+			"begin": "(?i)\\s*(startsubcode)\\s*",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other"
+				}
+			},
+			"end": "(?i)\\s*(endsubcode)\\s*",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.other"
+				}
+			},
+			"patterns": [{
+					"include": "#comments"
+				},
+				{
+					"include": "#operators-all"
+				},
+				{
+					"include": "#array"
+				},
+				{
+					"include": "#struct"
+				},
+				{
+					"include": "#data-types"
+				},
+				{
+					"include": "#macro-call"
+				},
+				{
+					"include": "#variable"
+				}
+			]
+		},
+		"square-brackets": {
+			"name": "meta.brace.square.acnu",
+			"begin": "[",
+			"end": "]",
+			"patterns": [{
+					"include": "#number"
+				},
+				{
+					"include": "#comma"
+				},
+				{
+					"include": "#variable"
+				}
+			]
+		},
+		"round-brackets": {
+			"name": "meta.brace.round.acnu",
+			"begin": "\\(",
+			"end": "\\)",
+			"patterns": [{
+					"include": "#statement-operators"
+				},
+				{
+					"include": "#operators-arithmetic"
+				},
+				{
+					"include": "#struct"
+				},
+				{
+					"include": "#comma"
+				},
+				{
+					"include": "#array"
+				},
+				{
+					"include": "#string"
+				},
+				{
+					"include": "#variable"
+				}
+			]
+		},
+		"comma": {
+			"name": "punctuation.separator.comma.acnu",
+			"match": ","
+		},
+		"variable": {
+			"match": "(?i)\\s*(?!endif|endf|endw|until|endmacro)([\\w\\$]+)\\s*",
+			"name": "support.variable.acnu"
+		},
+		"array": {
+			"patterns": [{
+				"match": "\\s*(\\w*)(\\[)(.*?)(])\\s*",
+				"captures": {
+					"1": {
+						"name": "variable.other.object.acnu"
+					},
+					"2": {
+						"name": "meta.brace.square"
+					},
+					"3": {
+
+						"patterns": [{
+								"include": "#comma"
+							},
+							{
+								"include": "#number"
+							},
+							{
+								"include": "#operators-arithmetic"
+							},
+							{
+								"include": "#array"
+							},
+							{
+								"include": "#variable"
+							}
+						]
+					},
+					"4": {
+						"name": "meta.brace.square"
+					}
+				}
+			}]
+		},
+		"comments": {
+			"name": "comment.line.number-sign.acnu",
+			"begin": "#",
+			"end": "\n"
+		},
+		"declare-variable": {
+
+			"begin": "(?i)\\s*(?i)(declare|pdeclare)\\s*",
+			"end": "\\s*$",
+			"beginCaptures": {
+				"0": {
+					"name": "keyword.other"
+				}
+			},
+			"patterns": [{
+					"include": "#declare-variable-def-value"
+				},
+				{
+					"include": "#declare-variable-type"
+				},
+				{
+					"include": "#declare-variable-global"
+				},
+				{
+					"include": "#declare-variable-visibility"
+				},
+				{
+					"include": "#declare-variable-name"
+				}
+			]
+		},
+		"declare-variable-global": {
+			"name": "storage.modifier.acnu",
+			"match": "(?i)\\s*(global|cglobal|mglobal)\\s*"
+		},
+		"declare-variable-visibility": {
+			"name": "storage.modifier.acnu",
+			"match": "(?i)\\s*(norec|noshow)\\s*"
+
+		},
+		"declare-variable-type": {
+			"name": "support.type.primitive.acnu",
+			"match": "(?i)\\s*(int|string|real)\\s*"
+		},
+		"declare-variable-def-value": {
+			"match": "(?i)\\s*(DEF)\\s*(={1})[\\s]*(\\S*)",
+			"captures": {
+				"1": {
+					"name": "keyword.other"
+				},
+				"2": {
+					"name": "keyword.operator.assignment.acnu"
+				},
+				"3": {
+					"patterns": [{
+						"include": "#data-types"
+					}]
+				}
+			}
+		},
+		"declare-variable-name": {
+			"patterns": [{
+					"include": "#comma"
+				},
+				{
+					"include": "#array"
+				},
+				{
+					"include": "#variable"
+				}
+			]
+		},
+		"macro-endmacro": {
+			"begin": "(?i)(macro)\\s*(=)\\s*([\\$a-zA-Z0-9_]+)\\s*(.*)\\n",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.function.acnu"
+				},
+				"2": {
+					"name": "keyword.operator.assignment.acnu"
+				},
+				"3": {
+					"name": "entity.name.function.acnu"
+				},
+				"4": {
+					"patterns": [{
+							"include": "#comma"
+						},
+						{
+							"include": "#macro-options"
+						},
+						{
+							"include": "#macro-brackets"
+						},
+						{
+							"include": "#macro-preset-set"
+						}
+					]
+				}
+			},
+			"end": "\\s*(?i)(endmacro)\\s*",
+			"endCaptures": {
+				"1": {
+					"name": "storage.type.function.acnu"
+				}
+			},
+			"patterns": [{
+				"include": "#macro-patterns"
+			}]
+		},
+		"macro-preset-set": {
+			"match": "\\s*(?i)(preset|set)\\s*",
+			"name": "keyword.other"
+		},
+		"macro-brackets": {
+			"begin": "\\(|\\[",
+			"beginCaptures": {
+				"name": "punctuation.paren.open.acnu"
+			},
+			"end": "\\)|\\]",
+			"endCaptures": {
+				"name": "punctuation.paren.close.acnu"
+			},
+			"patterns": [{
+					"include": "#declare-variable-type"
+				},
+				{
+					"include": "#array"
+				},
+				{
+					"include": "#variable"
+				}
+			]
+		},
+		"macro-options": {
+			"patterns": [{
+					"include": "#comma"
+				},
+				{
+					"match": "\\s*(?i)(append|debug|decode|edit_prog|edit_version|fast|generic_args|nosep|overw|public|record|sprog_select|waterjet)\\s*",
+					"name": "keyword.other"
+				}
+			]
+		},
+		"macro-call": {
+			"match": "(?i)\\s*([a-zA-Z0-9_\\-]*?)(?<!\")(\\(.*?\\))(?!\")",
+			"captures": {
+				"1": {
+					"name": "entity.name.function.acnu"
+				},
+				"2": {
+					"patterns": [{
+						"include": "#round-brackets"
+					},
+					{
+						"include": "#statement-operators"
+					},
+					{
+						"include": "#operators-arithmetic"
+					},
+					{
+						"include": "#struct"
+					},
+					{
+						"include": "#comma"
+					},
+					{
+						"include": "#array"
+					},
+					{
+						"include": "#string"
+					}]
+				}
+			}
+		},
+		"statement-operators": {
+			"patterns": [{
+					"include": "#operators-comparison"
+				},
+				{
+					"include": "#operators-arithmetic"
+				},
+				{
+					"include": "#operators-logical"
+				},
+				{
+					"include": "#operators-relational"
+				}
+			]
+		},
+		"operators-all": {
+			"patterns": [{
+					"include": "#operators-arithmetic"
+				},
+				{
+					"include": "#operators-assignment"
+				},
+				{
+					"include": "#operators-comparison"
+				},
+				{
+					"include": "#operators-logical"
+				},
+				{
+					"include": "#operators-relational"
+				}
+			]
+		},
+		"operators-arithmetic": {
+			"name": "keyword.operator.arithmetic.acnu",
+			"match": "\\s*(%|\\*|\/|-|\\+)\\s*"
+		},
+		"operators-comparison": {
+			"name": "keyword.operator.comparison.acnu",
+			"match": "\\s*(==|!=)\\s*"
+		},
+		"operators-assignment": {
+			"name": "keyword.operator.assignment.acnu",
+			"match": "\\s*\\=\\s*"
+		},
+		"operators-logical": {
+			"name": "keyword.operator.logical.acnu",
+			"match": "\\s*(\\|\\||&&)\\s*"
+		},
+		"operators-relational": {
+			"name": "keyword.operator.relational.acnu",
+			"match": "\\s*(=>|<=|>=|=<|<|>)\\s*"
+		},
+		"struct": {
+			"match": "\\s*(\\w+)(?=\\.\\w+\\b)(\\.)\\s*",
+			"captures": {
+				"1": {
+					"patterns": [{
+						"include": "#variable"
+					}]
+				},
+				"2": {
+					"name": "keyword.operator"
+				}
+			}
+		},
+
+
+		"struct-declaration": {
+			"begin": "(?i)\\s*(beginstruct)\\s*(=)\\s*(.*)$",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.struct.acnu"
+				},
+				"2": {
+					"include": "#operators-assignment"
+				},
+				"3": {
+					"name": "entity.name.type.struct.acnu"
+				}
+			},
+			"end": "(?i)\\s*(endstruct)",
+			"endCaptures": {
+				"1": {
+					"name": "storage.type.struct.acnu"
+				}
+			},
+			"patterns": [{
+					"include": "#comments"
+				},
+				{
+					"include": "#declare-variable"
+				}
+			]
+		},
+		"statement-brackets": {
+			"patterns": [{
+					"include": "#round-brackets"
+				},
+				{
+					"include": "#array"
+				},
+				{
+					"include": "#statement-operators"
+				},
+				{
+					"include": "#struct"
+				},
+				{
+					"include": "#macro-call"
+				},
+				{
+					"include": "#data-types"
+				},
+				{
+					"include": "#variable"
+				}
+			]
+		},
+		"macro-patterns": {
+			"patterns": [{
+					"include": "#comments"
+				},
+				{
+					"include": "#statements"
+				},
+				{
+					"include": "#operators-all"
+				},
+				{
+					"include": "#struct-declaration"
+				},
+				{
+					"include": "#declare-variable"
+				},
+				{
+					"include": "#array"
+				},
+				{
+					"include": "#struct"
+				},
+				{
+					"include": "#data-types"
+				},
+				{
+					"include": "#macro-call"
+				},
+				{
+					"include": "#variable"
+				}
+			]
+		},
+		"statement-patterns": {
+			"patterns": [{
+					"include": "#comments"
+				},
+				{
+					"include": "#else-if-statement"
+				},
+				{
+					"include": "#else-keyword"
+				},
+				{
+					"include": "#break-keyword"
+				},
+				{
+					"include": "#statements"
+				},
+				{
+					"include": "#operators-all"
+				},
+				{
+					"include": "#struct-declaration"
+				},
+				{
+					"include": "#declare-variable"
+				},
+				{
+					"include": "#array"
+				},
+				{
+					"include": "#struct"
+				},
+				{
+					"include": "#data-types"
+				},
+				{
+					"include": "#macro-call"
+				},
+				{
+					"include": "#variable"
+				}
+			]
+		},
+		"statements": {
+			"patterns": [{
+					"include": "#if-statement"
+				},
+				{
+					"include": "#for-statement"
+				},
+				{
+					"include": "#constant"
+				},
+				{
+					"include": "#repeat-statement"
+				},
+				{
+					"include": "#while-statement"
+				}
+			]
+		},
+		"break-keyword": {
+			"match": "(?i)\\s*(break)\\s*",
+			"name": "keyword.control.conditional.acnu"
+		},
+		"else-keyword": {
+			"match": "(?i)\\s*(!?else)\\s*",
+			"name": "keyword.control.conditional.acnu"
+		},
+		"else-if-statement": {
+			"match": "\\s*(?i)\\s*(elseif)\\s*(\\()\\s*(.*)\\s*(\\))\\s*(then)\\s*",
+			"captures": {
+				"1": {
+					"name": "keyword.control.conditional.acnu"
+				},
+				"2": {
+					"name": "punctuation.paren.open.acnu"
+				},
+				"3": {
+					"patterns": [{
+						"include": "#statement-brackets"
+					}]
+				},
+				"4": {
+					"name": "punctuation.paren.close.acnu"
+				},
+				"5": {
+					"name": "keyword.control.conditional.acnu"
+				}
+			}
+		},
+		"if-statement": {
+			"begin": "\\s*(?i)\\s*(?<!else)\\s*(!?if)\\s*(\\()\\s*(.*)\\s*(\\))\\s*(then)\\s*",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.conditional.acnu"
+				},
+				"2": {
+					"name": "punctuation.paren.open.acnu"
+				},
+				"3": {
+					"patterns": [{
+						"include": "#statement-brackets"
+					}]
+				},
+				"4": {
+					"name": "punctuation.paren.close.acnu"
+				},
+				"5": {
+					"name": "keyword.control.conditional.acnu"
+				}
+			},
+			"end": "^\\s*(?i)(!?endif)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.conditional.acnu"
+				}
+			},
+			"patterns": [{
+				"include": "#statement-patterns"
+			}]
+		},
+		"for-statement": {
+			"begin": "\\s*(?i)(for)\\s*(\\S*)\\s*(=)\\s*(\\S*)\\s*(to|downto)\\s*(\\S*)\\s*(by)?\\s*(\\S*)?\\s*(do)\\s*",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.loop.acnu"
+				},
+				"2": {
+					"patterns": [{
+							"include": "#array"
+						},
+						{
+							"include": "#data-types"
+						},
+						{
+							"include": "#variable"
+						}
+					]
+				},
+				"3": {
+					"patterns": [{
+						"include": "#operators-assignment"
+					}]
+				},
+				"4": {
+					"patterns": [{
+							"include": "#array"
+						},
+						{
+							"include": "#data-types"
+						},
+						{
+							"include": "#variable"
+						}
+					]
+				},
+				"5": {
+					"name": "keyword.control.loop.acnu"
+				},
+				"6": {
+					"patterns": [{
+							"include": "#array"
+						},
+						{
+							"include": "#data-types"
+						},
+						{
+							"include": "#variable"
+						}
+					]
+				},
+				"7": {
+					"name": "keyword.control.loop.acnu"
+				},
+				"8": {
+					"patterns": [{
+							"include": "#array"
+						},
+						{
+							"include": "#data-types"
+						},
+						{
+							"include": "#variable"
+						}
+					]
+				},
+				"9": {
+					"name": "keyword.control.loop.acnu"
+				}
+			},
+			"end": "^\\s*(?i)(endf)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.loop.acnu"
+				}
+			},
+			"patterns": [{
+				"include": "#statement-patterns"
+			}]
+		},
+		"repeat-statement": {
+			"begin": "(?i)\\s*(repeat)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.loop.acnu"
+				}
+			},
+			"end": "(?i)\\s*(until)\\s*(\\()\\s*([^\\).]*)\\s*(\\))\\s*",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.loop.acnu"
+				},
+				"2": {
+					"name": "punctuation.paren.open.acnu"
+				},
+				"3": {
+					"patterns": [{
+						"include": "#statement-brackets"
+					}]
+				},
+				"4": {
+					"name": "punctuation.paren.close.acnu"
+				}
+			},
+			"patterns": [{
+				"include": "#statement-patterns"
+			}]
+		},
+		"while-statement": {
+			"begin": "(?i)\\s*(while)\\s*(\\()\\s*([^\\).]*)\\s*(\\))\\s*(do)\\s*",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.loop.acnu"
+				},
+				"2": {
+					"name": "punctuation.paren.open.acnu"
+				},
+				"3": {
+					"patterns": [{
+						"include": "#statement-brackets"
+					}]
+				},
+				"4": {
+					"name": "punctuation.paren.close.acnu"
+				},
+				"5": {
+					"name": "keyword.control.loop.acnu"
+				}
+			},
+			"end": "(?i)\\s*(endw)\\s*",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.loop.acnu"
+				}
+			},
+			"patterns": [{
+				"include": "#statement-patterns"
+			}]
+		}
+	}
+}

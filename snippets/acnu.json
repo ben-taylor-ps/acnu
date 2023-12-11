@@ -1,0 +1,1676 @@
+{
+	"acnu-ARA-declare":
+	{
+	   "prefix": "declare global",
+	   "body": [
+		   "DECLARE ${1|GLOBAL, MGLOBAL, CGLOBAL|}${2|NOREC, NOSHOW, SPIED|}${3|DEF=, |}"
+	   ],
+	   "description": "CODE-acnu"
+	},
+	"acnu-ARA-getvardim":
+	{
+	   "prefix": "GetVarDim",
+	   "body": [
+		   "GetVardim(\"${1:MY_VAR}\",${2|1,2|})"
+	   ],
+	   "description": "Get the dimension of an array type variable"
+	},
+	"acnu-bu-addmofication": {
+	   "prefix": "addmodification",
+	   "body": [
+		   "SWITCH(VAR[96],NULL,VAR[96]=\"$CURRENT_DATE/$CURRENT_MONTH_NAME_SHORT/$CURRENT_YEAR\",NOOP())",
+		   "# REV 4                 : ${1:DescriptionOfRevision}",
+		   "# NC Simul Version      : ${2:NCSIMULversion}",
+		   "# Reviewer              : ${3:Reviewer} [Investigation]",
+		   "${TM_DIRECTORY}"
+	   ],
+	   "description": "Add a modification with name, date and SF case"
+	},
+	"acnu-spacer":
+	{
+	   "prefix": "#--",
+	   "body": [
+			"#\n#----------------------------------------------------------------#\n#"
+	   ],
+	   "description": "Add a spacer line"
+	},
+
+	"acnu-bu-start-changelog":
+	{
+	   "prefix": "startchangelog",
+	   "body": [
+		   "# \/\/ BTA - SF - ${TM_DIRECTORY/.*([0-9]{8}).*$/$1/} - $CURRENT_DATE $CURRENT_MONTH_NAME_SHORT $CURRENT_YEAR"
+	   ],
+	   "description": "Add a modification with name, date and SF case"
+	},
+	"acnu-bu-full-changelog":
+	{
+	   "prefix": "changelog",
+	   "body": [
+		   "# \/\/ BTA - SF - ${TM_DIRECTORY/.*([0-9]{8}).*$/$1/} - $CURRENT_DATE $CURRENT_MONTH_NAME_SHORT $CURRENT_YEAR",
+		   "${TM_SELECTED_TEXT}\n${0:}\n",
+		   "# \\ END BTA"
+	   ],
+	   "description": "Add a modification with name, date and SF case"
+	},
+	"acnu-bu-end-changelog":
+	{
+	   "prefix": "endchangelog",
+	   "body": [
+		   "# \\ END BTA"
+	   ],
+	   "description": "End modification section"
+	},
+	"acnu-macro":
+	{
+	   "prefix": "Macro",
+	   "body": [
+		   "Macro=${TM_SELECTED_TEXT:${1:MyCode}}()${2|\\,OVERW,\\,FAST,\\,DEBUG,\\,GENERIC_ARGS|}",
+		   "# Begin of Specific MACRO - ${1}",
+		   "# Macro creation by ${2:Name} $CURRENT_DATE $CURRENT_MONTH_NAME_SHORT $CURRENT_YEAR ==>",
+		   "# Macro review   by                   XX XXX XXXX",
+		   "\n${4:\n}\n",
+		   "# End of Specific MACRO - ${1}",
+		   "ENDMACRO"
+	   ],
+	   "description": "Creation of a macro"
+	},
+	"acnu-newaformat":
+	{
+		"prefix": "newaformat",
+		"body": [
+		 "DECLARE GLOBAL NOREC DEF=0 INT ${1:FormatName}",
+		 "$1=AddFormat(\"A\", \"${2:Size}\")",
+		 "SetFormatName(Ft($1), \"${3:Description}\")"
+		],
+		"description": "Creation of an integer format"
+	 },
+	"acnu-newnformat":
+	{
+	   "prefix": "newnformat",
+	   "body": [
+		"DECLARE GLOBAL NOREC DEF=0 INT ${1:FormatName}",
+		"$1=AddFormat(\"N\", \"${2:LeadZeros},${3:MaximumNumberOfDigits}${5:}\"",
+		"SetFormatName(Ft($1}, \"${4:Description}\")"
+	   ],
+	   "description": "Creation of a decimal format"
+	},
+	"acnu-newdformat":
+	{
+	   "prefix": "newdformat",
+	   "body": [
+		"DECLARE GLOBAL NOREC DEF=0 INT ${1:FormatName}",
+		"$1=AddFormat(\"D\", \"${2:LeadZeros},${3:TrailZeros},${4:DigitLeft},${5:DigitRight},${6|0x1,0x2,0x4,0x8|}${8:}\"",
+		"SetFormatName(Ft($1}, \"${7:Description}\")"
+	   ],
+	   "description": "Creation of an integer format"
+	},
+	"acnu-add": {
+		"prefix": "add",
+		"body": [
+			"Add(\"${1:variable}\",\"${2:string}\")"
+		],
+		"description": "Concatenates a string with a variable"
+	},
+	"acnu-add-call-on-code": {
+		"prefix": "addcalloncode",
+		"body": [
+			"Add_Call_On_Code(\"${1:code}\",FT(${2:formatTable}),\"${3:commands}\",\"${4|BEFORE,AFTER|}_CODE\")"
+		],
+		"description": "This function allow to execute some commands when an ACNU code is executed (NCS 10.2)."
+	},
+	"acnu-add-call-on-s-code": {
+		"prefix": "addcallonscode",
+		"body": [
+			"Add_Call_On_SCode(${1:List},${2:Number},\"${3:Commands}\",\"${4|BEFORE,AFTER|}_CODE\")"
+		],
+		"description": "This function allow to execute some commands when an ACNU code is executed (NCS 10.2)."
+	},
+	"acnu-add-call-on-condition": {
+		"prefix": "addcalloncondition",
+		"body": [
+			"Add_Call_On_Condition(\"${1:Name Of Condition}\",\"${2:Commands}\",\"${3|BEFORE,AFTER|}_${4|INITB,ATEOB,AFTEREOB,NAXE_DEF|}\",\"${5:Condition}\")"
+		],
+		"description": "Creates a test that is evaluated several times"
+	},
+	"acnu-add-call-on-ncs-function": {
+		"prefix": "addcallonncsfunction",
+		"body": [
+			"Add_Call_On_NCS_Function(\"${1:FunctionName}\",\"${2:MacroCalled}\",\"${3|BEFORE,AFTER|}_CALL\")"
+		],
+		"description": "This function create an event when an NCSimul function is called (NCS 10.2)."
+	},
+	"acnu-add-call-on-ncs-var-change": {
+		"prefix": "addcallonncsvarchange",
+		"body": [
+			"Add_Call_On_Ncs_Var_Change(\"${1:VariableName}\",\"${2:MacroCalled}\",\"${3|BEFORE,AFTER|}_ASSIGN\")"
+		],
+		"description": "This function create an event when an NCSimul variable is written"
+	},
+	"acnu-add-code": {
+		"prefix": "addcode",
+		"body": [
+			"Add_Code(\"${1:code}\",BF(${2:Context}),FT(${3:FormatTableEntry}),\"${4:Command}\",\"${5:Description}\")"
+		],
+		"description": "Dynamic Creation/Modification of a code"
+	},
+	"acnu-add-s-code": {
+		"prefix": "addscode",
+		"body": [
+			"AddSCode(${1:SCodeGroup},${2:SCodeNumber},\"${3:Command}\",\"${4:Description}\")"
+		],
+		"description": "Dynamic Creation/Modification of a Sub code"
+	},	
+	"acnu-add-format": {
+		"prefix": "addformat",
+		"body": [
+			"AddFormat(\"${1|A,N,D|}\",\"${2:formatDefinition}\")"
+		],
+		"description": "Definition of a format with automatic numbering in the form of a variable."
+	},
+	"acnu-add-ids": {
+		"prefix": "add_ids",
+		"body": [
+			"Add_IDs(${1:number},\"${2|EVERY,FALSE,WHEN,WHENEVER,FROM|}\",\"${3:testCondition}\",\"${4:command}\")"
+		],
+		"description": "Specialised function for the synchronous actions of SINUMERIK 840D."
+	},
+	"acnu-aftereob": {
+		"prefix": "aftereob",
+		"body": [
+			"AfterEOB(\"${1:commands}\")"
+		],
+		"description": "Adds the command string \"commands\" to the commands to execute after completion of decoding of current block."
+	},
+	"acnu-aftereobp": {
+		"prefix": "aftereobp",
+		"body": [
+			"AfterEOBP(${1:priority},\"${2:commands}\")"
+		],
+		"description": "Adds the command string \"commands\" to the commands to execute after completion of decoding of current block."
+	},
+	"acnu-argname": {
+		"prefix": "argname",
+		"body": [
+			"ArgName(${1:index})"
+		],
+		"description": "Yields the name of the argument provided for a macro by reference (variables table with &)."
+	},
+	"acnu-ascii": {
+		"prefix": "ascii",
+		"body": [
+			"ASCII(${1:value})"
+		],
+		"description": "ASCII-conversion of the argument if necessary."
+	},
+	"acnu-askbit": {
+		"prefix": "askbit",
+		"body": [
+			"AskBit(${1:CTXT}, ${2:Number})"
+		],
+		"description": "Test a bit in a word. See also 1.25 CLRBIT(WORD,NUM). Deactivate a bit"
+	},
+	"acnu-ateob": {
+		"prefix": "ateob",
+		"body": [
+			"ATEOB(\"${1:commands}\")"
+		],
+		"description": "Adds the command string \"commands\" to the commands to execute after completion of decoding of current block."
+	},
+	"acnu-ateobp": {
+		"prefix": "ateobp",
+		"body": [
+			"ATEOBP(${1:priority},\"${2:commands}\")"
+		],
+		"description": "Adds the command \"commands\" to the commands to execute with priority P after completion of decoding of current block."
+	},
+	"acnu-backiso": {
+		"prefix": "backiso",
+		"body": [
+			"BackISO()"
+		],
+		"description": "Function that repositions the cursor before CODE,xx (during interpreting), cancels the subsequent commands, then inhibits CODE,xx for the next decoding of the word."
+	},
+	"acnu-balise": {
+		"prefix": "balise",
+		"body": [
+			"Balise(\"${2:stringToDisplay}\")"
+		],
+		"description": "Graphic display of NC program functions"
+	},
+	"acnu-bf": {
+		"prefix": "bf",
+		"body": [
+			"BF(${1:IntegerValueOfBit})"
+		],
+		"description": "Converts integer to a bit value"
+	},
+	"acnu-bloc": {
+		"prefix": "bloc",
+		"body": [
+			"Bloc(${1|1,2|})"
+		],
+		"description": "Extraction of a part of the currently decoded block."
+	},
+	"acnu-call-dll": {
+		"prefix": "calldll",
+		"body": [
+			"Call_DLL(\"${1:DLLFileName}\", \"${2:DLLFunction}\")"
+		],
+		"description": "This function will call the function DLL_FUNC in the dll file - DLL_FILE."
+	},
+	"acnu-call": {
+		"prefix": "call",
+		"body": [
+			"Call(\"${1:subroutine}\", ${2|1,2,3,4|}), \"${3:From})\", \"${4:To})\", \"${5:TimesToExecute})\""
+		],
+		"description": "Calling an internal or external NC subroutine by its name/number"
+	},
+	"acnu-cancel-ids": {
+		"prefix": "cancelids",
+		"body": [
+			"Cancel_IDs(${1:IDNumber}"
+		],
+		"description": "Specialised function for synchronous actions of the SINUMERIK 840D machine"
+	},
+	"acnu-clrbit": {
+		"prefix": "clrbit",
+		"body": [
+			"ClrBit(${1:CTXT}, ${2:Number}"
+		],
+		"description": "To deactivate a bit in a word."
+	},
+	"acnu-cnst": {
+		"prefix": "cnst",
+		"body": [
+			"CNST(${1|ABS,CCLW,CLW,CORR_ITN,CORR_LX,CORR_LY,CORR_LZ,OFF,OFF_POS,ON|}"
+		],
+		"description": "Yields a predefined constant."
+	},
+	"acnu-create-synonym": {
+		"prefix": "creatsynonym",
+		"body": [
+			"CreateSynonym(\"${1:Alias}\", ${resultString}), \"${Options})\")"
+		],
+		"description": "Principle: when you have created an ALIAS, if this is encountered in the program, the NC interprets it as STR"
+	},
+	"acnu-decode": {
+		"prefix": "decode",
+		"body": [
+			"Decode(${1:stringToDecode})"
+		],
+		"description": "Decodes a character string like an NC program block."
+	},
+	"acnu-decptr": {
+		"prefix": "decptr",
+		"body": [
+			"DecPtr(${1:incrementToMoveBy})"
+		],
+		"description": "Moves the decoding pointer step by step"
+	},
+	"acnu-endprg": {
+		"prefix": "endprg",
+		"body": [
+			"EndPrg()"
+		],
+		"description": "Triggers the end of the main program."
+	},
+	"acnu-endjob": {
+		"prefix": "endjob",
+		"body": [
+			"EndJob()"
+		],
+		"description": "Trigger the end of decoding all programs"
+	},
+	"acnu-eob": {
+		"prefix": "eob",
+		"body": [
+			"EOB()"
+		],
+		"description": "Triggers an end of block BEFORE the physical end of the line, and continues to decode the rest like a new block"
+	},
+	"acnu-error": {
+		"prefix": "error",
+		"body": [
+			"Error(\"${1:errorMessage}\", ${2|0,1,2|})"
+		],
+		"description": "Triggers an error message. The following character ‘{}’ are forbidden (everything inside will be deleted with the {})."
+	},
+	"acnu-error-ascii": {
+		"prefix": "errorascii",
+		"body": [
+			"Error(\"${1:errorMessage} = \" + ASCII(${1:errorMessage}), ${2|0,1,2|})"
+		],
+		"description": "Triggers an error message. The following character ‘{}’ are forbidden (everything inside will be deleted with the {})."
+	},
+	"acnu-eval": {
+		"prefix": "eval",
+		"body": [
+			"Eval(${1:MacroCalledWhenTrue}, ${2:MacroCalledWhenFalse})"
+		],
+		"description": "Boolean evaluation of an NC condition and macro call for TRUE/FALSE."
+	},
+	"acnu-erase": {
+		"prefix": "erase",
+		"body": [
+			"Erase(${1|Declare,Macro,SCode,Code|}, ${2:ToDelete}, ${2:ContextOrIndex})"
+		],
+		"description": "Boolean evaluation of an NC condition and macro call for TRUE/FALSE."
+	},
+	"acnu-execute-ids": {
+		"prefix": "executeids",
+		"body": [
+			"Execute_IDs(${1:ID_Number})"
+		],
+		"description": "Specialised function for synchronous actions on the SINUMERIK 840D."
+	},
+	"acnu-fcall-full": {
+		"prefix": "fcallfull",
+		"body": [
+			"FCall(${1:FileName})"
+		],
+		"description": "Calls an external NC subroutine by its file name."
+	},
+	"acnu-fcall-partial": {
+		"prefix": "fcallpartial",
+		"body": [
+			"FCall(${1:FileName}, ${2|1,2,3,4|}, ${3:From}, ${4:To}, ${4:ExecutionCount})"
+		],
+		"description": "Calls an external NC subroutine by its file name."
+	},
+	"acnu-fexist": {
+		"prefix": "fexist",
+		"body": [
+			"FExist(${1:FileName}, ${2|0,1,2|})"
+		],
+		"description": "Test the existence of a file in the MEMORY or NCTAPE machine directories."
+	},
+	"acnu-find-filenames": {
+		"prefix": "findfilenames",
+		"body": [
+			"Find_Filenames(${1|1,2,3,4|}, ${2:FileExtension})"
+		],
+		"description": "Search in the wanted directory how many files with extension mask"
+	},
+	"acnu-find-foldernames": {
+		"prefix": "findfoldernames",
+		"body": [
+			"Find_FolderNames(${1|1,2,3,4|}, ${2:Mask})"
+		],
+		"description": "Search in the wanted directory how many folders."
+	},
+	"acnu-flushb": {
+		"prefix": "flushb",
+		"body": [
+			"FlushB(${1|,1|})"
+		],
+		"description": "Requests that end-of-block decoding be ignored."
+	},
+	"acnu-formate": {
+		"prefix": "formate",
+		"body": [
+			"Formate(${1:VariableToFormat}, ${2:FormatNumber})"
+		],
+		"description": "Formats the variable VAR in the character string."
+	},
+	"acnu-format-of": {
+		"prefix": "formatof",
+		"body": [
+			"FormatOF(\"${1:VariableToFormat}\", BF(${2:Context}))"
+		],
+		"description": "Indicates the format number used to decode a defined CODE/CONTEXT."
+	},
+	"acnu-ft": {
+		"prefix": "ft",
+		"body": [
+			"FT(${1:FormatNumber})"
+		],
+		"description": "Search more selectively by using FT(2) than 2 alone."
+	},
+	"acnu-genrecord": {
+		"prefix": "genrecord",
+		"body": [
+			"GenRecord(${1:Variable},${2|,0,1,2|})"
+		],
+		"description": "The function executes the macro whose name is defined in the variable supplied as an argument."
+	},
+	"acnu-getcodemacro": {
+		"prefix": "genrecord",
+		"body": [
+			"GenRecord(${1:Variable},${2|,0,1,2|})"
+		],
+		"description": "The function executes the macro whose name is defined in the variable supplied as an argument."
+	},
+	"acnu-getcontrollermaxlinescount": {
+		"prefix": "getcontrollermaxlinescount",
+		"body": [
+			"GetControllerMaxLinesCount()"
+		],
+		"description": "Grabs the value from the reading panels of Number of Executions of the same block above:"
+	},
+	"acnu-getdatetime": {
+		"prefix": "getdatetime",
+		"body": [
+			"Get_Date_Time(${1:Format})"
+		],
+		"description": "Grabs the system date and time"
+	},
+	"acnu-getncsimulversion": {
+		"prefix": "getncsimulversion",
+		"body": [
+			"GetNCSimulVersion(\"${1|,ncs,market,build|}\")"
+		],
+		"description": "Grabs the value from the reading panels of Number of Executions of the same block above:"
+	},
+	"acnu-getscodemacro": {
+		"prefix": "getscodemacro",
+		"body": [
+			"GetSCodeMacro(${1:SubcodeList},${2:SubcodeNumber})"
+		],
+		"description": "Same as GetCodeMacro but for a subcode."
+	},
+	"acnu-gettimeacc": {
+		"prefix": "gettimeacc",
+		"body": [
+			"GetTimeAcc()"
+		],
+		"description": "Return an estimation of the time elapsed since the beginning of the program. Factors in acceleration"
+	},
+	"acnu-gettime": {
+		"prefix": "gettime",
+		"body": [
+			"GetTime()"
+		],
+		"description": "Return an estimation of the time elapsed since the beginning of the program. doesn't factor in acceleration"
+	},
+	"acnu-gettimesynchro": {
+		"prefix": "gettimesynchro",
+		"body": [
+			"GetTimeSynchro()"
+		],
+		"description": "Return an estimation of the time elapsed since the beginning of the program. MultiChannel machines"
+	},
+	"acnu-getfilesnames": {
+		"prefix": "getfilenames",
+		"body": [
+			"Get_Filenames(${1|0,1,2,3,4|}, ${2:Mask}, ${3:Array})"
+		],
+		"description": "Search in the wanted directory how many files with extension mask, and store the result in Array"
+	},
+	"acnu-getfoldernames": {
+		"prefix": "getfoldernames",
+		"body": [
+			"Get_FolderNames(${1|0,1,2,3,4|}, ${2:Mask}, ${3:Array})"
+		],
+		"description": "Search in the wanted directory how many folders, and store the result in Array"
+	},
+	"acnu-getformat": {
+		"prefix": "getformat",
+		"body": [
+			"GetFormat(FT(${1:FormatNumber}), ${2|1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16|})"
+		],
+		"description": "Retrieves a field from an existing format"
+	},
+	"acnu-getmessage": {
+		"prefix": "getmessage",
+		"body": [
+			"GetMessage(${1:listNumber}, ${2:messageNumber})"
+		],
+		"description": "Retrieves the text from a message created by AddMessage= in the current language"
+	},
+	"acnu-getopskip": {
+		"prefix": "getopskip",
+		"body": [
+			"GetOpSkip(${1:Char})"
+		],
+		"description": "Returns if the string CHARACTER is active or not."
+	},
+	"acnu-getoriginsblocked": {
+		"prefix": "getoriginsblocked",
+		"body": [
+			"GetOriginsBlocked()"
+		],
+		"description": "Returns the value of the check box ignore origins definition in programs in the initialization function"
+	},
+	"acnu-getprogramscontext": {
+		"prefix": "getprogramscontext",
+		"body": [
+			"GetProgramContext()"
+		],
+		"description": "Returns the context of program currently decoded"
+	},
+	"acnu-getprogline": {
+		"prefix": "getprogline",
+		"body": [
+			"GetProgLine(${1:IND1},${2:IND2})"
+		],
+		"description": "Indicates the chronological row of the program (not the imbrications level) and the block that is currently being decoded."
+	},
+	"acnu-gonextc": {
+		"prefix": "gonextc",
+		"body": [
+			"GoNextC(${1:STR1},${2:MAC1})"
+		],
+		"description": "Allows a multiple jump defined when the upcoming string is read."
+	},
+	"acnu-gotomark": {
+		"prefix": "gotomark",
+		"body": [
+			"GoToMark(${1:n})"
+		],
+		"description": "Return to the pointer position saved by SETMARK(n)"
+	},
+	"acnu-insert": {
+		"prefix": "insert",
+		"body": [
+			"Insert(\"${1:String}\")"
+		],
+		"description": "The string is inserted in the block that is currently being decoded just after the current decoding pointer without creating a block by itself"
+	},
+	"acnu-ischangeorigin": {
+		"prefix": "ischangeorigin",
+		"body": [
+			"IsChangeOrigin()"
+		],
+		"description": "Tests whether or not origins have been modified. Use this test in the INITJOB automatic macro."
+	},
+	"acnu-iscodeexist": {
+		"prefix": "iscodeexist",
+		"body": [
+			"IsCodeExist(\"${1:NameOfCode}\",BF(${2:NumContext}))"
+		],
+		"description": "This function tests if a code exists whatever the context, if a context is provided it tests the ability of NCSIMUL to decode a code."
+	},
+	"acnu-islabel": {
+		"prefix": "islabel",
+		"body": [
+			"IsLabel(${1:NameOfLabel},BF(${2|,0,1}))"
+		],
+		"description": "Test if a label is defined."
+	},
+	"acnu-ismoduleavailable": {
+		"prefix": "ismoduleavailable",
+		"body": [
+			"IsModuleAvailable(${1:NameOfModule})"
+		],
+		"description": "Get the availability of a module in the licence."
+	},
+	"acnu-isscodeexist": {
+		"prefix": "isscodeexist",
+		"body": [
+			"IsSCodeExist(${1:SCodeList}, ${2:SCodeValue})"
+		],
+		"description": "Test the existence of the value of a Subcode."
+	},
+	"acnu-isversioncompatible": {
+		"prefix": "isversioncompatible",
+		"body": [
+			"IsVersionCompatible(${1:Major}, ${2:Minimum}, ${3:Patch})"
+		],
+		"description": "Tests compatibility with the NCSimul version defined"
+	},
+	"acnu-jump": {
+		"prefix": "jump",
+		"body": [
+			"Jump(${1|1,2,3,4|}, ${2:Address}, ${3|0,1,2,3|}, ${4|,0,1,2|})"
+		],
+		"description": "Executes a jump in the NC program, and search for the TYPE."
+	},
+	"acnu-jumpr": {
+		"prefix": "jumpr",
+		"body": [
+			"JumpR(${1|1,2,3,4|}, ${2:Address}, ${3|0,1,2,3|})"
+		],
+		"description": "Executes a jump in the NC program, including search for the TYPE and records position for return"
+	},
+	"acnu-launchexternalprocess": {
+		"prefix": "launchexternalprocess",
+		"body": [
+			"LaunchExternalProcess(${1:String})"
+		],
+		"description": "This function allows to launch an external executable."
+	},
+	"acnu-len": {
+		"prefix": "len",
+		"body": [
+			"Len(${1:String})"
+		],
+		"description": "Yields length of character string"
+	},
+	"acnu-machinemenugetoldvalue": {
+		"prefix": "machinemenugetoldvalue",
+		"body": [
+			"MachineMenuGetOldValue(${1:String}, ${2:String2})"
+		],
+		"description": "Get the values from the machine menu."
+	},
+	"acnu-mcall": {
+		"prefix": "mcall",
+		"body": [
+			"MCall(${1:Macro})"
+		],
+		"description": "Call MACRO"
+	},
+	"acnu-mdecode": {
+		"prefix": "mdecode",
+		"body": [
+			"MDecode(${1:Macro})"
+		],
+		"description": "Decodes the character string STR with the decoding logic of a user MACRO"
+	},
+	"acnu-mreturn": {
+		"prefix": "mreturn",
+		"body": [
+			"MReturn(${1:})"
+		],
+		"description": "Finishes execution of the macro and returns the value VAL if specified."
+	},
+	"acnu-ncs-addexternalmacro": {
+		"prefix": "ncsaddexternalmacro",
+		"body": [
+			"NCS_AddExternalMacro(${1:MacroPath},${1:MacroName},${1:MacroArgList})"
+		],
+		"description": "Adds an external macro"
+	},
+	"acnu-nextb": {
+		"prefix": "nextb",
+		"body": [
+			"NextB()"
+		],
+		"description": "Positioning on the next NC block"
+	},
+	"acnu-nextc": {
+		"prefix": "nextc",
+		"body": [
+			"NextC(${1|0,1|})"
+		],
+		"description": "Acquisition of the next character in the block"
+	},
+	"acnu-nexti": {
+		"prefix": "nexti",
+		"body": [
+			"NextI(${1:String}, FT(${2:Format}))"
+		],
+		"description": "Acquisition of next known code."
+	},
+	"acnu-nextiso": {
+		"prefix": "nextiso",
+		"body": [
+			"NextISO()"
+		],
+		"description": "Acquisition of the next NC sequence defined by the codes and formats of the CNU file."
+	},
+	"acnu-nextl": {
+		"prefix": "nextl",
+		"body": [
+			"NextL()"
+		],
+		"description": "Reads the next NC block."
+	},
+	"acnu-nextv": {
+		"prefix": "nextv",
+		"body": [
+			"NextV(FT(${1:Format}))"
+		],
+		"description": "Acquisition of the next value."
+	},
+	"acnu-noop": {
+		"prefix": "noop",
+		"body": [
+			"NoOp()"
+		],
+		"description": "Null command (has no effect)"
+	},
+	"acnu-opmess": {
+		"prefix": "opmess",
+		"body": [
+			"OpMess(${1|1,2|},{2:Message})"
+		],
+		"description": "Operator message"
+	},
+	"acnu-pdecode": {
+		"prefix": "pdecode",
+		"body": [
+			"PDecode(${1:String})"
+		],
+		"description": "Pseudo-decoding of the character string contained in STR."
+	},
+	"acnu-prevb": {
+		"prefix": "prevb",
+		"body": [
+			"PrevB()"
+		],
+		"description": "Calls the previous NC block."
+	},
+	"acnu-print": {
+		"prefix": "print",
+		"body": [
+			"Print(${1:String})"
+		],
+		"description": "Printing of a message in the macro output file (if it is in RECORD mode)."
+	},
+	"acnu-redef": {
+		"prefix": "redef",
+		"body": [
+			"Redef(${1:OldName}, ${1:NewName})"
+		],
+		"description": "Redefine the name of a function"
+	},
+	"acnu-rep": {
+		"prefix": "rep",
+		"body": [
+			"Rep(${1:Value})"
+		],
+		"description": "Initialise an array with an identical value."
+	},
+	"acnu-resetcontrollerlinescount": {
+		"prefix": "resetcontrollerlinescount",
+		"body": [
+			"ResetControllerLinesCount()"
+		],
+		"description": "This function sets back to zero the counter of the repetition of blocks executed in a macro"
+	},
+	"acnu-return": {
+		"prefix": "return",
+		"body": [
+			"Return()"
+		],
+		"description": "This function has the same effect than a MReturn()+End of program / CN subroutine."
+	},
+	"acnu-rjump": {
+		"prefix": "rjump",
+		"body": [
+			"RJump()"
+		],
+		"description": "Return after a JumpR()"
+	},
+	"acnu-saise": {
+		"prefix": "saise",
+		"body": [
+			"Saise(${1:Variable}, ${2:TextToDisplay})"
+		],
+		"description": "Activates an input window where the variable can be assigned."
+	},
+	"acnu-set": {
+		"prefix": "set",
+		"body": [
+			"Set(${1:})"
+		],
+		"description": "Initialise an array with a list of values"
+	},
+	"acnu-setcalloncode": {
+		"prefix": "setcalloncode",
+		"body": [
+			"Set_Call_On_Code(${1:Code}, ${2:Context}, ${3|0,1|})"
+		],
+		"description": "This function is used to activate/deactivate the condition on a code"
+	},
+	"acnu-setcallonscode": {
+		"prefix": "setcallonscode",
+		"body": [
+			"Set_Call_On_SCode(${1:SCodeList}, ${2:SCodeNum}, ${3|0,1|})"
+		],
+		"description": "This function is used to activate/deactivate the condition on a code"
+	},
+	"acnu-setcalloncondition": {
+		"prefix": "setcalloncondition",
+		"body": [
+			"Set_Call_On_SCode(${1:ConditionName}, ${2|0,1|})"
+		],
+		"description": "This function should be used to activate or deactivate a test previously created with Add_Call_On_Condition()"
+	},
+	"acnu-setcallonncsvarchange": {
+		"prefix": "setcallonncsvarchange",
+		"body": [
+			"Set_Call_On_Ncs_Var_Change(${1:NCSVarName}, ${2|0,1|})"
+		],
+		"description": "This function enable/disable the test on variable name"
+	},
+	"acnu-setbit": {
+		"prefix": "setbit",
+		"body": [
+			"SetBit(${1:CTXT}, ${2:Number})"
+		],
+		"description": "Activates a bit in a word."
+	},
+	"acnu-setscodename": {
+		"prefix": "setscodename",
+		"body": [
+			"SetSCodeName(${1:SubCodeList}, ${2:SubCodeNumber}, ${3:Description})"
+		],
+		"description": "This function is used to describe the subcodes inside a text-based controller."
+	},
+	"acnu-strfind": {
+		"prefix": "strfind",
+		"body": [
+			"StrFind(${1:StringToSearch}, ${2:SearchTerm})"
+		],
+		"description": "Search for the presence of a character string in another string (from the beginning)"
+	},
+	"acnu-strfindfull": {
+		"prefix": "strfindfull",
+		"body": [
+			"StrFind(${1:StringToSearch}, ${2:SearchTerm}, \"nocase\", \"search\", ${3:Occurences})"
+		],
+		"description": "Search for the presence of a character string in another string (from the beginning)"
+	},
+	"acnu-setscodenamerange": {
+		"prefix": "setscodenamerange",
+		"body": [
+			"SetScodeNameRange(${1:NumGroup}, ${2:ScodeMin}, ${3:ScodeMax}, ${4:StringName}, ${3:Occurences})"
+		],
+		"description": "Set default value to Sub-Codes"
+	},
+	"acnu-strfindreversefull": {
+		"prefix": "strfindreversefull",
+		"body": [
+			"StrFindReverse(${1:StringToSearch}, ${2:SearchTerm}, \"nocase\", \"search\", ${3:Occurences})"
+		],
+		"description": "Search for the presence of a character string in another string (from the end)"
+	},
+	"acnu-strfindreverse": {
+		"prefix": "strfind",
+		"body": [
+			"StrFind(${1:StringToSearch}, ${2:SearchTerm})"
+		],
+		"description": "Search for the presence of a character string in another string (from the end)"
+	},
+	"acnu-setformat": {
+		"prefix": "setformat",
+		"body": [
+			"SetFormat(FT(${1:FormatNumber}), ${2|1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16|}, ${3:Value})"
+		],
+		"description": "Retrieves a field from an existing format"
+	},
+	"acnu-setformatname": {
+		"prefix": "setformatname",
+		"body": [
+			"SetFormatName(FT(${1:FormatNumber}), ${2:Description})"
+		],
+		"description": "This function is used to describe a format number inside a text-based controller."
+	},
+	"acnu-setopskip": {
+		"prefix": "setopskip",
+		"body": [
+			"SetOpSkip(${1:Character}, ${2|0,1|})"
+		],
+		"description": "set a new character as OPSKIP"
+	},
+	"acnu-setmac": {
+		"prefix": "setmac",
+		"body": [
+			"SetMac(${1:Name}, ${2|0,1|})"
+		],
+		"description": "Activates or deactivates a defined and called macro"
+	},
+	"acnu-setmark": {
+		"prefix": "setmark",
+		"body": [
+			"SetMark(${1:Number})"
+		],
+		"description": "Saves the current position of the decoding pointer in an NC program."
+	},
+	"acnu-stop": {
+		"prefix": "stop",
+		"body": [
+			"Stop()"
+		],
+		"description": "This creates a record and add a \"stop\" icon inside the graph tab"
+	},
+	"acnu-strsubs": {
+		"prefix": "strsubs",
+		"body": [
+			"StrSubs(${1:ModificationString}, ${2:CharactersToReplace}, ${3:NewString})"
+		],
+		"description": "Replaces the characters in a string"
+	},
+	"acnu-strsubsword": {
+		"prefix": "strsubsword",
+		"body": [
+			"StrSubs(${1:ModificationString}, ${2:CharactersToReplace}, ${3:NewString}, \"word\")"
+		],
+		"description": "Replaces the characters in a string"
+	},
+	"acnu-substrfull": {
+		"prefix": "substrfull",
+		"body": [
+			"SubStr(${1:String}, ${2:StartPosition})"
+		],
+		"description": "Extracts a character string"
+	},
+	"acnu-substr": {
+		"prefix": "substr",
+		"body": [
+			"SubStr(${1:String}, ${2:StartPosition}, ${3:Length})"
+		],
+		"description": "Extracts a character string"
+	},
+	"acnu-switch": {
+		"prefix": "switch",
+		"body": [
+			"Switch(${1:TestVariable}, ${2:ValueToTest}, ${3:CommandIfMatch})"
+		],
+		"description": "Execution conditioned by value of an expression"
+	},
+	"acnu-switchcondition": {
+		"prefix": "switchcondition",
+		"body": [
+			"Switch_Condition(${1:TestVariable}, ${2:ValueToTest}, ${3:MacroTrue},  ${3:MacroFalse})"
+		],
+		"description": "Execution conditioned by value of an expression"
+	},
+	"acnu-testc": {
+		"prefix": "testc",
+		"body": [
+			"TestC(${1|0,1|})"
+		],
+		"description": "Tests the next character to decode."
+	},
+	"acnu-testnc": {
+		"prefix": "testnc",
+		"body": [
+			"TestNC(${1:NumberOfCharacters}, ${2|0,1|})"
+		],
+		"description": "Tests the next string of N characters to decode."
+	},
+	"acnu-thread": {
+		"prefix": "thread",
+		"body": [
+			"Thread()"
+		],
+		"description": "Not yet implemented"
+	},
+	"acnu-token": {
+		"prefix": "token",
+		"body": [
+			"Token(${1:String}, ${2:Separators}, ${2:Last})"
+		],
+		"description": "Extraction of a part of a complete string at a given separator or separators"
+	},
+	"acnu-trace-debug": {
+		"prefix": "tracedebug",
+		"body": [
+			"TraceDebug(${1:DebugMessage}, ${2:Option})"
+		],
+		"description": "display an error message if the NCSIMUL preference \"m_affiche_trace_debug\" is set to 1."
+	},
+	"acnu-unload-program": {
+		"prefix": "unloadprogram",
+		"body": [
+			"UnloadProgram(${1:Program})"
+		],
+		"description": "Force to unload a program when, it reads/writes multiples times."
+	},
+	"acnu-upper": {
+		"prefix": "uppper",
+		"body": [
+			"Uppper(${1:String})"
+		],
+		"description": "Converts the string to uppercase"
+	},
+	"acnu-withprogramcontext": {
+		"prefix": "withprogramcontext",
+		"body": [
+			"WithProgramContext(${1:ContextNumber})"
+		],
+		"description": "Set a context for the current program"
+	},
+	"acnu-abs": {
+		"prefix": "abs",
+		"body": [
+			"Abs(${1:Value})"
+		],
+		"description": "Absolute value"
+	},
+	"acnu-acos": {
+		"prefix": "acos",
+		"body": [
+			"ACos(${1:Value})"
+		],
+		"description": "Arc cosine"
+	},
+	"acnu-angtovec": {
+		"prefix": "angtovec",
+		"body": [
+			"AngToVec(${1:Angle},${2:Vector})"
+		],
+		"description": "Calculates a vector representing the theoretical orientation of the tool axis according to the angles of the machine’s rotational axes selected by the SetRotary() function (taking into account the kinematics)."
+	},
+	"acnu-angtovecmachine": {
+		"prefix": "angtovecmachine",
+		"body": [
+			"AngToVec(${1:Angle},${2:Vector},\"machine\")"
+		],
+		"description": "Calculates a vector representing the theoretical orientation of the tool axis according to the angles of the machine’s rotational axes selected by the SetRotary() function (taking into account the kinematics)."
+	},
+	"acnu-asin": {
+		"prefix": "asin",
+		"body": [
+			"ASin(${1:Value})"
+		],
+		"description": "Arc-sine"
+	},
+	"acnu-atan": {
+		"prefix": "atan",
+		"body": [
+			"ATan(${1:Value})"
+		],
+		"description": "Arc tan"
+	},
+	"acnu-atan2": {
+		"prefix": "atan2",
+		"body": [
+			"ATan2(${1:ValueY},${2:ValueX})"
+		],
+		"description": "Arc-tangent with sign of angle"
+	},
+	"acnu-calc-offset-origin": {
+		"prefix": "calcoffsetorigin",
+		"body": [
+			"Calc_Offset_Origin(${1:CurrentPosition},${2:CurrentOrigin},${3:DeltaOrigin})"
+		],
+		"description": "Calculates the origin shift according to the kinematics (from current HEAD to active TABLE) and the movement of rotary axis from the zero position to the actual position."
+	},
+	"acnu-calptcir": {
+		"prefix": "calptcir",
+		"body": [
+			"CalPtCir(${1:StartPoint},${2:CentrePoint},${3:EndPoint},${4:Axis},${5:Tolerance},${6:MaximumNumberOfPoints},${6:ResultingPoints})"
+		],
+		"description": "Calculates points on a circle arc."
+	},
+	"acnu-condition": {
+		"prefix": "condition",
+		"body": [
+			"Condition(${1:Condition})"
+		],
+		"description": "Tests a condition defined by a character string. Operators used are defined with ACNU \"TEST=…\""
+	},
+	"acnu-copyvar": {
+		"prefix": "copyvar",
+		"body": [
+			"CopyVar(${1:Number},${2:Array1},${3:Array2})"
+		],
+		"description": "Copy (equality) of tables"
+	},
+	"acnu-copyvarcomplete": {
+		"prefix": "copyvarcomplete",
+		"body": [
+			"CopyVar(${1:Array1},${2:Array2})"
+		],
+		"description": "Complete copy (equality) of tables"
+	},
+	"acnu-cos": {
+		"prefix": "cos",
+		"body": [
+			"Cos(${1:Value})"
+		],
+		"description": "Cosine"
+	},
+	"acnu-declarebystring": {
+		"prefix": "declarebystring",
+		"body": [
+			"Declare(${1:String})"
+		],
+		"description": "Execute a \"DECLARE\" in the NC program"
+	},
+	"acnu-declarevariablenumber": {
+		"prefix": "declarevariablenumber",
+		"body": [
+			"DeclareVariableNumber(${1:String})"
+		],
+		"description": "Allow to evaluate variables with expressions"
+	},
+	"acnu-defined": {
+		"prefix": "defined",
+		"body": [
+			"Defined(${1:Variable})"
+		],
+		"description": "Test the definition of a variable"
+	},
+	"acnu-expr": {
+		"prefix": "expr",
+		"body": [
+			"Expr(${1:String})"
+		],
+		"description": "Evaluates the expression contained in the string with NCSIMUL operators"
+	},
+	"acnu-exprlast": {
+		"prefix": "exprlast",
+		"body": [
+			"ExprLast(${1:String})"
+		],
+		"description": "Evaluates the expression contained in the string with CNC operators"
+	},
+	"acnu-exprsilent": {
+		"prefix": "exprsilent",
+		"body": [
+			"ExprSilent(${1:String},${2:IsValuationOkay})"
+		],
+		"description": "Similar to Expr, but if the evaluation fails, decoding continues"
+	},
+	"acnu-findanglesaround2axes": {
+		"prefix": "findanglesaround2axes",
+		"body": [
+			"FindAnglesAround2Axes(${1:Rotation1},${2:Rotation2},${3:PreviousVector},${4:CurrentVector},{5:Angle1Solution1},{6:Angle2Solution1},{7:Angle1Solution2},{8:Angle2Solution2},{9:NumberOfSolutions})"
+		],
+		"description": "Calculates the rotation angles around AX1 then around AX2"
+	},
+	"acnu-getrotationmatrix": {
+		"prefix": "getrotationmatrix",
+		"body": [
+			"GetRotationMatrix(${1:PreviousOrientation},${2:CurrentOrientation},${3:Direction},${4:RotationMatrix},{5:Times})"
+		],
+		"description": "Calculates the MAT rotation matrix to switch from the PREV_VEC vector to the CUR_VEC vector in the plane formed by the 2 vectors."
+	},
+	"acnu-getvarnbdim": {
+		"prefix": "getvarnbdim",
+		"body": [
+			"GetVarNbDim(${1:Variable})"
+		],
+		"description": "Returns the number of dimensions of the variable"
+	},
+	"acnu-getvardim": {
+		"prefix": "getvardim",
+		"body": [
+			"GetVarDim(${1:StringVariable},${2:Dimension})"
+		],
+		"description": "Returns the number of data that the variable identified by StringVariable can contain for the dimension Dimension."
+	},
+	"acnu-getvarreadonly": {
+		"prefix": "getvarreadonly",
+		"body": [
+			"GetVarReadOnly(${1:VariableName})"
+		],
+		"description": "Returns if the variable is read only or not."
+	},
+	"acnu-getvartype": {
+		"prefix": "getvartype",
+		"body": [
+			"GetVarType(${1:VariableName})"
+		],
+		"description": "Return the current type of the variable"
+	},
+	"acnu-getvarwtype": {
+		"prefix": "getvarwtype",
+		"body": [
+			"GetVarWType(${1:VariableName})"
+		],
+		"description": "Return what could be the type of the variable"
+	},
+	"acnu-getvecnorm": {
+		"prefix": "getvecnorm",
+		"body": [
+			"GetVecNorm(${1:Vector})"
+		],
+		"description": "Gets a vector normal."
+	},
+	"acnu-hexatoreal": {
+		"prefix": "hexatoreal",
+		"body": [
+			"HexaToReal(${1:Value})"
+		],
+		"description": "Convert hexadecimal value to decimal."
+	},
+	"acnu-intval": {
+		"prefix": "intval",
+		"body": [
+			"IntVal(${1:Variable})"
+		],
+		"description": "Integer-evaluation of the variable Variable."
+	},
+	"acnu-isnum": {
+		"prefix": "isnum",
+		"body": [
+			"IsNum(${1:Variable})"
+		],
+		"description": "Tests the numerical content of the Variable."
+	},
+	"acnu-isvar": {
+		"prefix": "isvar",
+		"body": [
+			"IsVar(${1:Variable})"
+		],
+		"description": "Tests the declaration (by all DECLARE modes) of the variable."
+	},
+	"acnu-matequal": {
+		"prefix": "matequal",
+		"body": [
+			"MatEqual(${1:Matrix1},${2:Matrix2})"
+		],
+		"description": "Test the equality between 2 matrix."
+	},
+	"acnu-matequaltolerance": {
+		"prefix": "matequaltolerance",
+		"body": [
+			"MatEqual(${1:Matrix1},${2:Matrix2},${£:Tolerance})"
+		],
+		"description": "Test the equality between 2 matrix."
+	},
+	"acnu-matident": {
+		"prefix": "matident",
+		"body": [
+			"MatIdent(${1:Matrix})"
+		],
+		"description": "Creates an identity matrix in Matrix"
+	},
+	"acnu-matinv": {
+		"prefix": "matinv",
+		"body": [
+			"MatInv(${1:Matrix1},${2:Matrix2})"
+		],
+		"description": "Creates a reversed matrix in Matrix1"
+	},
+	"acnu-matmul": {
+		"prefix": "matmul",
+		"body": [
+			"MatMul(${1:Matrix1},${2:Matrix2},${3:Matrix3})"
+		],
+		"description": "Composes matrices Matrix2 and Matrix3, result in Matrix1, Matrix1 = Matrix3 * Matrix2"
+	},
+	"acnu-matset": {
+		"prefix": "matset",
+		"body": [
+			"MatSet(${1:Matrix1},${2:Matrix2})"
+		],
+		"description": "Assigns the Matrix2 matrix to the Matrix1 matrix, Matrix1 = Matrix2"
+	},
+	"acnu-matrixtoangle": {
+		"prefix": "matrixtoangle",
+		"body": [
+			"MatrixToAngle(\"${1|Euler,xyz,xyz_abs|}\", ${2:Matrix},${3:RotationOne},${4:RotationTwo},${5:RotationThree})"
+		],
+		"description": "Converts matrix to rotations around axis based on input, Euler, XYZ, XYZ_ABS"
+	},
+	"acnu-matvec": {
+		"prefix": "matvec",
+		"body": [
+			"MatVec(${1:Matrix1},${2:Matrix2},${3:Vector})"
+		],
+		"description": "Rotation of a vector by a matrix, Matrix1 = Matrix2 * Vector"
+	},
+	"acnu-mkrotaxe": {
+		"prefix": "mkrotaxe",
+		"body": [
+			"MkRot(${1:Matrix},${2:Value},${3:Axes})"
+		],
+		"description": "Creates a matrix of rotation at a given angle."
+	},
+	"acnu-mkrotvector": {
+		"prefix": "mkrotvector",
+		"body": [
+			"MkRot(${1:Matrix},${2:Value},${3:I},${3:J},${3:K})"
+		],
+		"description": "Creates a matrix of rotation at a given angle."
+	},
+	"acnu-modifyvar": {
+		"prefix": "modifyvar",
+		"body": [
+			"ModifyVar(\"${1|NOREC,NOSHOW|}\",${2:VariableName},${3|0,1|})"
+		],
+		"description": "Change the visibility of a variable"
+	},
+	"acnu-ncsceil": {
+		"prefix": "ncsceil",
+		"body": [
+			"NCS_Ceil(${1:RealNumber},${2:DecimalPlaces})"
+		],
+		"description": "Give the upper round value for a number"
+	},
+	"acnu-ncsdiv": {
+		"prefix": "ncsdiv",
+		"body": [
+			"NCS_Div(${1:Number1},${2:Number2})"
+		],
+		"description": "Gives the quotient of the division Number1/Number2"
+	},
+	"acnu-ncsexp": {
+		"prefix": "ncsdiv",
+		"body": [
+			"NCS_Exp(${1:Number1})"
+		],
+		"description": "Gives the exponential value"
+	},
+	"acnu-ncsfloor": {
+		"prefix": "nscfloor",
+		"body": [
+			"NCS_Floor(${1:RealNumber},${2:DecimalPlaces})"
+		],
+		"description": "Gives the lower round value for a number"
+	},
+	"acnu-ncslog": {
+		"prefix": "ncslog",
+		"body": [
+			"NCS_Log(${1:RealNumber})"
+		],
+		"description": "Gives the Natural Logarithm"
+	},
+	"acnu-ncslog10": {
+		"prefix": "ncslog10",
+		"body": [
+			"NCS_Log10(${1:RealNumber})"
+		],
+		"description": "Gives the Decimal Logarithm"
+	},
+	"acnu-ncslower": {
+		"prefix": "ncslower",
+		"body": [
+			"NCS_Lower(${1:String})"
+		],
+		"description": "Convert a string to lowercase"
+	},
+	"acnu-ncsmax": {
+		"prefix": "ncsmax",
+		"body": [
+			"NCS_Max(${1:Number1}, ${2:Number2})"
+		],
+		"description": "Gives the greater number between the two arguments"
+	},
+	"acnu-ncsmeaframe": {
+		"prefix": "ncsmeaframe",
+		"body": [
+			"NCS_Meaframe(${1:IdealPoint}, ${2:MeasuredPoint}, ${3:MeasuredFrame}, ${4:TransRot}, ${5:FitQuality})"
+		],
+		"description": "This function allows to calculate the transformation frame between three ideal points and three measured points"
+	},
+	"acnu-ncsmin": {
+		"prefix": "ncsmin",
+		"body": [
+			"NCS_Min(${1:Number1}, ${2:Number2})"
+		],
+		"description": "Gives the lower number between the two arguments"
+	},
+	"acnu-ncsmod": {
+		"prefix": "ncsmod",
+		"body": [
+			"NCS_Mod(${1:Number1}, ${2:Number2})"
+		],
+		"description": "Gives the remainder of the division Number1/Number2"
+	},
+	"acnu-ncspow": {
+		"prefix": "ncspow",
+		"body": [
+			"NCS_Pow(${1:Number}, ${2:Exponent})"
+		],
+		"description": "Calculate Number^Exponent"
+	},
+	"acnu-ncsvectoradd": {
+		"prefix": "ncsvectoradd",
+		"body": [
+			"NCS_VectorAdd(${1:Result}, ${2:Vector1}, ${3:Vector2})"
+		],
+		"description": "Addition of two vectors"
+	},
+	"acnu-ncsvectorequal": {
+		"prefix": "ncsvectorequal",
+		"body": [
+			"NCS_VectorEqual(${1:Vector1}, ${2:Vector2}, ${3:Tolerance})"
+		],
+		"description": "Test if two vectors V1 and V2 are equal according to Epsilon tolerance"
+	},
+	"acnu-ncsvectormult": {
+		"prefix": "ncsvectormult",
+		"body": [
+			"NCS_VectorMult(${1:Result}, ${2:Vector1}, ${3:Scale})"
+		],
+		"description": "Multiplication of a vectors with a scalar (Result = Vector1 * Scale)."
+	},
+	"acnu-ncsvectorsubtract": {
+		"prefix": "ncsvectorsubtract",
+		"body": [
+			"NCS_VectorMult(${1:Result}, ${2:Vector1}, ${3:Vector2})"
+		],
+		"description": "Subtraction of two vectors (Result = Vector1 - Vector2)."
+	},
+	"acnu-nurbsreset": {
+		"prefix": "nurbsreset",
+		"body": [
+			"Nurbs_Reset()"
+		],
+		"description": "Reset a NURBS curve to zero"
+	},
+	"acnu-nurbsaddpoint": {
+		"prefix": "nurbsaddpoint",
+		"body": [
+			"Nurbs_AddPoint(${1:Array})"
+		],
+		"description": "Adds a control point/pole previously defined in a table of variables"
+	},
+	"acnu-nurbsinterp": {
+		"prefix": "nurbsinterp",
+		"body": [
+			"Nurbs_Interp(CNST(${1|NURBS_TYPE_XYZ,NURBS_TYPE_XYZ2,NURBS_TYPE_XYZABC|}))"
+		],
+		"description": "Calculation of the NURBS curve"
+	},
+	"acnu-prfclose": {
+		"prefix": "prfclose",
+		"body": [
+			"PrfClose()"
+		],
+		"description": "Close the open profile"
+	},
+	"acnu-prfclosefilename": {
+		"prefix": "prfclosefilename",
+		"body": [
+			"PrfClose(${1:FileName})"
+		],
+		"description": "Close the open profile and create an .ncp file in temp directory"
+	},
+	"acnu-prfext": {
+		"prefix": "prfext",
+		"body": [
+			"PrfExt(${1:Index}, ${2:XMin}, ${3:YMin}, ${4:XMax}, ${5:YMax})"
+		],
+		"description": "Calculate the limits (in the XY profile plane) of a memorised profile."
+	},
+	"acnu-prfinter": {
+		"prefix": "prfext",
+		"body": [
+			"PrfExt(${1:Index}, ${2:XPoint1}, ${3:YPoint1}, ${4:XPoint2}, ${5:YPoint2}, ${6:Points})"
+		],
+		"description": "Calculate the limits (in the XY profile plane) of a memorised profile."
+	},
+	"acnu-prfnbp": {
+		"prefix": "prfnbp",
+		"body": [
+			"PrfNbP()"
+		],
+		"description": "Return the number of point of a profile."
+	},
+	"acnu-prfopen": {
+		"prefix": "prfopen",
+		"body": [
+			"PrfOpen(${1:Index})"
+		],
+		"description": "Opens a profile"
+	},
+	"acnu-prfpnt": {
+		"prefix": "prfpnt",
+		"body": [
+			"PrfPnt(${1:ProfileIndex}, ${2:PointIndex}, ${3:Points})"
+		],
+		"description": "XY co-ordinates (in the XY plane of the profile) of a point on the memorised profile"
+	},
+	"acnu-prfroughx": {
+		"prefix": "prfroughx",
+		"body": [
+			"PrfRoughX(${1:ProfileIndex}, ${2:XStart}, ${3:YStart}, ${4:XEnd}, ${5:YEnd}, ${6:Step}, ${7:Points})"
+		],
+		"description": "Calculation of roughing-out points of a profile \"by X direction\""
+	},
+	"acnu-prfroughy": {
+		"prefix": "prfroughy",
+		"body": [
+			"PrfRoughY(${1:ProfileIndex}, ${2:XStart}, ${3:YStart}, ${4:XEnd}, ${5:YEnd}, ${6:Step}, ${7:Points})"
+		],
+		"description": "Calculation of roughing-out points of a profile \"by Y direction\""
+	},
+	"acnu-prfstock": {
+		"prefix": "prfstock",
+		"body": [
+			"PrfRoughY(${1:ProfileIndex}, ${2:XLimit}, ${3:ZLimit})"
+		],
+		"description": "Define a stock profile"
+	},
+	"acnu-ptr": {
+		"prefix": "ptr",
+		"body": [
+			"PTR(${1:VariableName})"
+		],
+		"description": "Indirect variable assignment"
+	},
+	"acnu-removeequiv": {
+		"prefix": "removeequiv",
+		"body": [
+			"RemoveEquiv(${1:VariableName})"
+		],
+		"description": "removes an \"Equiv\""
+	},
+	"acnu-rotvec": {
+		"prefix": "rotvec",
+		"body": [
+			"RotVec(${1:OutVector}, ${2:Matrix}, ${3:InVector})"
+		],
+		"description": "Rotation of a vector by a rotation matrix (OutVector = Matrix * InVector)"
+	},
+	"acnu-setrotary": {
+		"prefix": "setrotary",
+		"body": [
+			"SetRotary(${1:Axis1}, ${2:Axis2})"
+		],
+		"description": "Choice of rotational axes for the AngToVec() and VecToAng() functions"
+	},
+	"acnu-setrotarymu": {
+		"prefix": "setrotarymu",
+		"body": [
+			"SetRotaryMU(${1:Axis1}, ${2:Axis2})"
+		],
+		"description": "Choice of rotational axes for the AngToVec() and VecToAng() functions"
+	},
+	"acnu-setstringsizemax": {
+		"prefix": "setstringsizemax",
+		"body": [
+			"SetStringSizeMax(${1:Variable}, ${2:MaxSize})"
+		],
+		"description": "This function is done to change the standard behaviour of NCSIMUL on the STRING variables."
+	},
+	"acnu-setvardim": {
+		"prefix": "setvardim",
+		"body": [
+			"SetVarDim(${1:ArrayName}, ${2:Row}, ${3:NewSize})"
+		],
+		"description": "Resize an array. This function can only increase the size of the variable."
+	},
+	"acnu-setvarreadonly": {
+		"prefix": "setvarreadonly",
+		"body": [
+			"SetVarReadOnly(${1:VariableName}, ${2|0,1|}, ${3|0,1,2|})"
+		],
+		"description": "Set the variable to read only or random access (RW)."
+	},
+	"acnu-sin": {
+		"prefix": "sin",
+		"body": [
+			"Sin(${1:Value})"
+		],
+		"description": "Sine"
+	},
+	"acnu-sprintf": {
+		"prefix": "sprintf",
+		"body": [
+			"SprintF(${1:Format}, ${2:})"
+		],
+		"description": "Sine"
+	},
+	"acnu-sqrt": {
+		"prefix": "sqrt",
+		"body": [
+			"Sqrt(${1:Value})"
+		],
+		"description": "Square root."
+	},
+	"acnu-tan": {
+		"prefix": "tan",
+		"body": [
+			"Tan(${1:Value})"
+		],
+		"description": "Tan"
+	},
+	"acnu-undef": {
+		"prefix": "undef",
+		"body": [
+			"Undef(${1:Variable})"
+		],
+		"description": "Undefining the variable"
+	},
+	"acnu-varenv": {
+		"prefix": "varenv",
+		"body": [
+			"VarEnv(\"${1|DIR_PROGRAM,DIR_TEMPORARY,DIR_CONTROL,MEMORY,USER_MEMORY,DIR_SIMULATION,DIR_TOOLS,DIR_HOLDERS,DIR MODELS|}\")"
+		],
+		"description": "Value of an environment variable"
+	},
+	"acnu-varset": {
+		"prefix": "varset",
+		"body": [
+			"VarSet(${1:VariableName}, ${2:Value})"
+		],
+		"description": "Sets the variable named VariableName to the value Value."
+	},
+	"acnu-vecadd": {
+		"prefix": "vecadd",
+		"body": [
+			"VecAdd(${1:ResultingVector}, ${2:FirstVector}, ${3:SecondVector})"
+		],
+		"description": "Adds 2 vectors."
+	},
+	"acnu-vecsub": {
+		"prefix": "vecsub",
+		"body": [
+			"VecSub(${1:ResultingVector}, ${2:FirstVector}, ${3:SecondVector})"
+		],
+		"description": "Subtracts 2 vectors (ResultingVector = FistVector - SecondVector)"
+	},
+	"acnu-vecnorm": {
+		"prefix": "vecnorm",
+		"body": [
+			"VecNorm(${1:Vector})"
+		],
+		"description": "Returns the normal of a vector"
+	},
+	"acnu-vecscalar": {
+		"prefix": "vecscalar",
+		"body": [
+			"VecScalar(${1:FirstVector}, ${2:SecondVector})"
+		],
+		"description": "Returns scalar product of FistVector * SecondVector"
+	},
+	"acnu-vecscale": {
+		"prefix": "vecscale",
+		"body": [
+			"VecScale(${1:ResultVector}, ${2:Vector}, ${3:MultiplicationValue})"
+		],
+		"description": "Multiplication of a vector by a constant."
+	},
+	"acnu-vecproduct": {
+		"prefix": "vecproduct",
+		"body": [
+			"VecProduct(${1:ResultVector}, ${2:FirstVector}, ${3:SecondVector})"
+		],
+		"description": "Vector product of two vectors (ResultVector = FirstVector ^ SecondVector)."
+	},
+	"acnu-vecunit": {
+		"prefix": "vecunit",
+		"body": [
+			"VecUnit(${1:ResultVector}, ${2:Vector})"
+		],
+		"description": "Unit vector of a vector. (ResultVector = |Vector|)"
+	},
+	"acnu-vectoang": {
+		"prefix": "vectoang",
+		"body": [
+			"VecToAng(${1:InVector}, ${2:SolutionAngles1}, ${3:SolutionAngles2}, ${4:})"
+		],
+		"description": "Calculates the angles of the machine rotational axes selected by the SetRotary"
+	}
+}

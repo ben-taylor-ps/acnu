@@ -1,0 +1,31 @@
+{
+  "name": "acnu",
+  "displayName": "NCSIMUL ACNU Language",
+  "description": "Syntax highlighting for the NCSIMUL ACNU Language",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+	"contributes": {
+		"snippets": [
+			{
+				"language": "acnu",
+				"path": "./snippets/acnu.json"
+			}
+		],
+    "languages": [{
+      "id": "acnu",
+      "aliases": ["acnu", "acnu"],
+      "extensions": [".cnu", ".cnu_write"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "acnu",
+      "scopeName": "source.acnu",
+      "path": "./syntaxes/acnu.tmLanguage.json"
+    }]
+  }
+}
