@@ -159,10 +159,13 @@
 					"include": "#comma"
 				},
 				{
+					"include": "#macro-call"
+				},
+				{
 					"include": "#array"
 				},
 				{
-					"include": "#string"
+					"include":"#data-types"
 				},
 				{
 					"include": "#variable"
@@ -357,7 +360,7 @@
 			]
 		},
 		"macro-call": {
-			"match": "(?i)\\s*([a-zA-Z0-9_\\-]*?)(\\((?:[^\"]|\"(?:[^\"\\\\]|\\\\.)*\")+\\))",
+			"match": "(?i)\\s*([a-zA-Z0-9_\\-]*?)(\\((?:[^\"]|\"(?:[^\"\\\\]|\\\\.)*\")*\\))",
 			
 			"captures": {
 				"1": {
@@ -370,24 +373,6 @@
 					},
 					{
 						"include": "#round-brackets"
-					},
-					{
-						"include": "#statement-operators"
-					},
-					{
-						"include": "#operators-arithmetic"
-					},
-					{
-						"include": "#macro-call"
-					},
-					{
-						"include": "#struct"
-					},
-					{
-						"include": "#comma"
-					},
-					{
-						"include": "#array"
 					}]
 				}
 			}
