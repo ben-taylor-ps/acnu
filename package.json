@@ -2,7 +2,7 @@
   "name": "acnu",
   "displayName": "NCSIMUL ACNU Language",
   "description": "Syntax highlighting for the NCSIMUL ACNU Language",
-  "version": "1.0.",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.84.0"
   },
