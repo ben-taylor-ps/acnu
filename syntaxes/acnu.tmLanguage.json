@@ -357,13 +357,18 @@
 			]
 		},
 		"macro-call": {
-			"match": "(?i)\\s*([a-zA-Z0-9_\\-]*?)(?<!\")(\\(.*?\\))(?!\")",
+			"match": "(?i)\\s*([a-zA-Z0-9_\\-]*?)(\\((?:[^\"]|\"(?:[^\"\\\\]|\\\\.)*\")+\\))",
+			
 			"captures": {
 				"1": {
 					"name": "entity.name.function.acnu"
 				},
 				"2": {
-					"patterns": [{
+					"patterns": [
+					{
+						"include": "#string"
+					},
+					{
 						"include": "#round-brackets"
 					},
 					{
@@ -373,6 +378,9 @@
 						"include": "#operators-arithmetic"
 					},
 					{
+						"include": "#macro-call"
+					},
+					{
 						"include": "#struct"
 					},
 					{
@@ -380,9 +388,6 @@
 					},
 					{
 						"include": "#array"
-					},
-					{
-						"include": "#string"
 					}]
 				}
 			}

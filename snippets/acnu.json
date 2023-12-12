@@ -22,7 +22,7 @@
 		   "# REV 4                 : ${1:DescriptionOfRevision}",
 		   "# NC Simul Version      : ${2:NCSIMULversion}",
 		   "# Reviewer              : ${3:Reviewer} [Investigation]",
-		   "${TM_DIRECTORY}"
+		   "$${TM_DIRECTORY/.*([0-9]{8}).*$/$1/}"
 	   ],
 	   "description": "Add a modification with name, date and SF case"
 	},
@@ -69,7 +69,7 @@
 		   "# Begin of Specific MACRO - ${1}",
 		   "# Macro creation by ${2:Name} $CURRENT_DATE $CURRENT_MONTH_NAME_SHORT $CURRENT_YEAR ==>",
 		   "# Macro review   by                   XX XXX XXXX",
-		   "\n${4:\n}\n",
+		   "\n${0:\n}\n",
 		   "# End of Specific MACRO - ${1}",
 		   "ENDMACRO"
 	   ],
