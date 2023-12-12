@@ -1,4 +1,4 @@
-# acnu README
+# NCSIMUL ACNU Language README
 
 Syntax highlighting for the NCSIMUL ACNU language
 
