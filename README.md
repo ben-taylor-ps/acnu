@@ -6,11 +6,7 @@ Syntax highlighting for the NCSIMUL ACNU language
 
 Performs syntax highlighting for the NCSIMUL ACNU Language
 
-![Syntax Highlighting](images/syntaxHightlighting.png)
-
-Snippets for most of the inbuilt macros/functions are included and more will follow.
-
-![Snippets](images/snippets.png)
+Also includes snippets for most of the inbuilt macros/functions are included and more will follow.
 
 ## Requirements
 
