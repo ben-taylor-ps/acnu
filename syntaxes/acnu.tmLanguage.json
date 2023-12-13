@@ -5,6 +5,9 @@
 			"include": "#comments"
 		},
 		{
+			"include": "#data-types"
+		},
+		{
 			"include": "#operators-all"
 		},
 		{
@@ -27,9 +30,6 @@
 		},
 		{
 			"include": "#struct"
-		},
-		{
-			"include": "#data-types"
 		},
 		{
 			"include": "#macro-call"
@@ -61,7 +61,7 @@
 			}]
 		},
 		"number": {
-			"match": "[-]?[0-9]+\\.{0,1}[0-9]*",
+			"match": "[-]?[0-9]+\\.?[0-9]*",
 			"name": "constant.numeric.acnu"
 		},
 		"hexadecimal": {
@@ -108,6 +108,9 @@
 					"include": "#comments"
 				},
 				{
+					"include": "#data-types"
+				},
+				{
 					"include": "#operators-all"
 				},
 				{
@@ -115,9 +118,6 @@
 				},
 				{
 					"include": "#struct"
-				},
-				{
-					"include": "#data-types"
 				},
 				{
 					"include": "#macro-call"
@@ -150,6 +150,9 @@
 					"include": "#statement-operators"
 				},
 				{
+					"include":"#data-types"
+				},
+				{
 					"include": "#operators-arithmetic"
 				},
 				{
@@ -163,9 +166,6 @@
 				},
 				{
 					"include": "#array"
-				},
-				{
-					"include":"#data-types"
 				},
 				{
 					"include": "#variable"
@@ -480,6 +480,9 @@
 					"include": "#array"
 				},
 				{
+					"include": "#data-types"
+				},
+				{
 					"include": "#statement-operators"
 				},
 				{
@@ -487,9 +490,6 @@
 				},
 				{
 					"include": "#macro-call"
-				},
-				{
-					"include": "#data-types"
 				},
 				{
 					"include": "#variable"
@@ -502,6 +502,9 @@
 				},
 				{
 					"include": "#statements"
+				},
+				{
+					"include": "#data-types"
 				},
 				{
 					"include": "#operators-all"
@@ -517,9 +520,6 @@
 				},
 				{
 					"include": "#struct"
-				},
-				{
-					"include": "#data-types"
 				},
 				{
 					"include": "#macro-call"
@@ -546,6 +546,9 @@
 					"include": "#statements"
 				},
 				{
+					"include": "#data-types"
+				},
+				{
 					"include": "#operators-all"
 				},
 				{
@@ -559,9 +562,6 @@
 				},
 				{
 					"include": "#struct"
-				},
-				{
-					"include": "#data-types"
 				},
 				{
 					"include": "#macro-call"
