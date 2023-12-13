@@ -57,17 +57,14 @@
 		"string-single-quote": {
 			"name": "string.quoted.double.acnu",
 			"begin": "'",
-			"end": "'",
-			"patterns": [{
-				"name": "constant.character.escape.acnu",
-				"match": "\\\\[\\S]"
-			}]
+			"end": "'"
 		},
 		"string-double-quote": {
 			"name": "string.quoted.double.acnu",
 			"begin": "\"",
 			"end": "\"",
-			"patterns": [{
+			"patterns": [
+				{
 				"name": "constant.character.escape.acnu",
 				"match": "\\\\[\\S]"
 			}]
