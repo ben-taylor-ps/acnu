@@ -8,6 +8,9 @@
 			"include": "#data-types"
 		},
 		{
+			"include": "#add-message-rank"
+		},
+		{
 			"include": "#operators-all"
 		},
 		{
@@ -456,8 +459,43 @@
 				}
 			}
 		},
+		"add-message-rank":{
+			"match": "(?i)(addmessagerank)\\s*(=)\\s*(.*)",
+			"captures" : {
+				"1":{
+					"name":"keyword.other.addmessagerank.acnu"
+				},
+				"2":{
+					"patterns":[
+						{
+							"include" : "#operators-assignment"
+						}
+					]
+				},
+				"3":{
+					"patterns":[
+						{
+							"include": "#greedy-string"
+						},
+						{
+							"include":"#comma"
+						},
+						{
+							"include":"#number"
+						},
+						{
+							"include": "#variable"
+						}
+					]
+				}
+			}	
+		
+		},
+		"greedy-string":{
+			"match": "\"(.*)\"",
+			"name": "string.quoted.double.acnu"
 
-
+		},
 		"struct-declaration": {
 			"begin": "(?i)\\s*(beginstruct)\\s*(=)\\s*(.*)$",
 			"beginCaptures": {
@@ -603,7 +641,7 @@
 			]
 		},
 		"break-keyword": {
-			"match": "(?i)\\s*(break)\\s*",
+			"match": "(?i)\\s+(break)\\s+",
 			"name": "keyword.control.conditional.acnu"
 		},
 		"else-keyword": {

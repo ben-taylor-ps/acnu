@@ -1,43 +1,55 @@
 {
-  "name": "acnu",
-  "publisher": "bjtaylor8",
-  "displayName": "NCSIMUL ACNU Language",
-  "description": "Syntax highlighting for the NCSIMUL ACNU Language",
-  "license": "MIT",
-  "icon": "images/icon.ico",
-  "version": "1.0.8",
-  "engines": {
-    "vscode": "^1.84.0"
-  },
-  "categories": [
-    "Programming Languages"
-  ],
-  "contributes": {
-    "snippets": [
-      {
-        "language": "acnu",
-        "path": "./snippets/acnu.json"
-      }
-    ],
-    "languages": [
-      {
-        "id": "acnu",
-        "aliases": [
-          "acnu"
-        ],
-        "extensions": [
-          ".cnu",
-          ".cnu_write"
-        ],
-        "configuration": "./language-configuration.json"
-      }
-    ],
-    "grammars": [
-      {
-        "language": "acnu",
-        "scopeName": "source.acnu",
-        "path": "./syntaxes/acnu.tmLanguage.json"
-      }
-    ]
-  }
+	"name": "acnu",
+	"publisher": "bjtaylor8",
+	"displayName": "NCSIMUL ACNU Language",
+	"description": "Syntax highlighting for the NCSIMUL ACNU Language",
+	"license": "MIT",
+	"icon": "images/icon.ico",
+	"version": "1.0.8",
+	"engines": {
+		"vscode": "^1.84.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"snippets": [
+			{
+				"language": "acnu",
+				"path": "./snippets/acnu.json"
+			}
+		],
+		"languages": [
+			{
+				"id": "acnu",
+				"aliases": [
+					"acnu"
+				],
+				"extensions": [
+					".cnu",
+					".cnu_write"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "acnu",
+				"scopeName": "source.acnu",
+				"path": "./syntaxes/acnu.tmLanguage.json"
+			}
+		]
+	},
+	"__metadata": {
+		"id": "b4455d59-28f4-4d57-8be9-86784af5e583",
+		"publisherId": "44c7bb0c-231a-4123-9c80-615e97f38f62",
+		"publisherDisplayName": "bjtaylor8",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": true,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1702483905082,
+		"pinned": false,
+		"preRelease": false
+	}
 }
