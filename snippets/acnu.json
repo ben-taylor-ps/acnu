@@ -150,7 +150,7 @@
 	"acnu-add-code": {
 		"prefix": "addcode",
 		"body": [
-			"Add_Code(\"${1:code}\",BF(${2:Context}),FT(${3:FormatTableEntry}),\"${4:Command}\",\"${5:Description}\")"
+			"AddCode(\"${1:code}\",BF(${2:Context}),FT(${3:FormatTableEntry}),\"${4:Command}\",\"${5:Description}\")"
 		],
 		"description": "Dynamic Creation/Modification of a code"
 	},
