@@ -664,7 +664,7 @@
 			"name": "keyword.control.conditional.acnu"
 		},
 		"else-if-statement": {
-			"match": "\\s*(?i)\\s*(elseif)\\s*(\\()\\s*(.*)\\s*(\\))\\s*(then)\\s*",
+			"match": "\\s*(?i)\\s*(!?elseif)\\s*(\\()\\s*(.*)\\s*(\\))\\s*(then)\\s*",
 			"captures": {
 				"1": {
 					"name": "keyword.control.conditional.acnu"

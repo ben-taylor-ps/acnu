@@ -12,6 +12,12 @@
 	"categories": [
 		"Programming Languages"
 	],
+	"keywords": [
+		"acnu",
+		"Hexagon",
+		"NCSIMUL",
+		"HxGN"
+	  ],
 	"contributes": {
 		"snippets": [
 			{
