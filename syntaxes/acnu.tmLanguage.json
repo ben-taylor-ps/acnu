@@ -246,7 +246,7 @@
 		"comments": {
 			"name": "comment.line.number-sign.acnu",
 			"begin": "#",
-			"end": "\n"
+			"end": "\\n"
 		},
 		"declare-variable": {
 
@@ -539,7 +539,11 @@
 			]
 		},
 		"statement-brackets": {
-			"patterns": [{
+			"patterns": [
+				{
+					"include": "#macro-call"
+				},
+				{
 					"include": "#round-brackets"
 				},
 				{
@@ -554,9 +558,7 @@
 				{
 					"include": "#struct"
 				},
-				{
-					"include": "#macro-call"
-				},
+
 				{
 					"include": "#variable"
 				}
@@ -639,7 +641,10 @@
 		},
 		"statements": {
 			"patterns": [{
-					"include": "#if-statement"
+					"include": "#if-multiline-statement"
+				},
+				{
+					"include": "#if-singleline-statement"
 				},
 				{
 					"include": "#for-statement"
@@ -685,8 +690,37 @@
 				}
 			}
 		},
-		"if-statement": {
-			"begin": "\\s*(?i)\\s*(?<!else)\\s*(!?if)\\s*(\\()\\s*(.*)\\s*(\\))\\s*(then)\\s*",
+		"if-singleline-statement": {
+			"match": "\\s*(?i)\\s*(?<!else)\\s*(!?if)\\s*(\\()\\s*(.*)\\s*(\\))\\s*(then)\\s*(.+)$",
+			"captures": {
+				"1": {
+					"name": "keyword.control.conditional.acnu"
+				},
+				"2": {
+					"name": "punctuation.paren.open.acnu"
+				},
+				"3": {
+					"patterns": [{
+						"include": "#statement-brackets"
+					}]
+				},
+				"4": {
+					"name": "punctuation.paren.close.acnu"
+				},
+				"5": {
+					"name": "keyword.control.conditional.acnu"
+				},
+				"6": {
+					"patterns":[
+						{
+							"include": "#statement-patterns" 
+						}
+					]
+				}
+			}
+		},
+		"if-multiline-statement": {
+			"begin": "\\s*(?i)\\s*(?<!else)\\s*(!?if)\\s*(\\()\\s*(.*)\\s*(\\))\\s*(then)\\s*[^\\S]$",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control.conditional.acnu"
@@ -824,7 +858,7 @@
 			}]
 		},
 		"while-statement": {
-			"begin": "(?i)\\s*(while)\\s*(\\()\\s*([^\\).]*)\\s*(\\))\\s*(do)\\s*",
+			"begin": "(?i)\\s*(while)\\s*(\\()\\s*(.*)\\s*(\\))\\s*(do)\\s*",
 			"beginCaptures": {
 				"1": {
 					"name": "keyword.control.loop.acnu"
