@@ -142,17 +142,33 @@
 		},
 		"square-brackets": {
 			"name": "meta.brace.square.acnu",
-			"begin": "[",
-			"end": "]",
-			"patterns": [{
-					"include": "#number"
-				},
-				{
-					"include": "#comma"
-				},
-				{
-					"include": "#variable"
-				}
+			"begin": "\\[",
+			"end": "\\]",
+			"patterns": [[{
+				"include": "#statement-operators"
+			},
+			{
+				"include":"#data-types"
+			},
+			{
+				"include": "#operators-arithmetic"
+			},
+			{
+				"include": "#struct"
+			},
+			{
+				"include": "#comma"
+			},
+			{
+				"include": "#macro-call"
+			},
+			{
+				"include": "#array"
+			},
+			{
+				"include": "#variable"
+			}
+		]
 			]
 		},
 		"round-brackets": {
@@ -195,35 +211,34 @@
 		},
 		"array": {
 			"patterns": [{
-				"match": "\\s*(\\w*)(\\[)(.*?)(])\\s*",
+				"match": "\\s*(\\w*)\\s*(\\[(?:[^\"]|\"(?:[^\"\\\\]|\\\\.)*\")*?\\])\\s*",
 				"captures": {
 					"1": {
 						"name": "variable.other.object.acnu"
 					},
 					"2": {
-						"name": "meta.brace.square"
-					},
-					"3": {
-
 						"patterns": [{
-								"include": "#comma"
-							},
-							{
-								"include": "#number"
-							},
-							{
-								"include": "#operators-arithmetic"
-							},
-							{
-								"include": "#array"
-							},
-							{
-								"include": "#variable"
-							}
-						]
-					},
-					"4": {
-						"name": "meta.brace.square"
+							"include": "#statement-operators"
+						},
+						{
+							"include":"#data-types"
+						},
+						{
+							"include": "#operators-arithmetic"
+						},
+						{
+							"include": "#struct"
+						},
+						{
+							"include": "#comma"
+						},
+						{
+							"include": "#macro-call"
+						},
+						{
+							"include": "#variable"
+						}
+					]
 					}
 				}
 			}]
