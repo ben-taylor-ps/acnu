@@ -1,11 +1,27 @@
 {
-	"acnu-ARA-declare":
+	"acnu-declare-full":
 	{
-	   "prefix": "declare global",
+	   "prefix": "declarefull",
 	   "body": [
-		   "DECLARE ${1|GLOBAL, MGLOBAL, CGLOBAL|}${2|NOREC, NOSHOW, SPIED|}${3|DEF=, |}"
+		   "${1|DECLARE,PDECLARE|} ${2|GLOBAL,MGLOBAL,CGLOBAL|} ${3|NOREC,NOSHOW,SPIED, |} DEF=${4:DefValue} ${5|TRIGR=, |} ${6|TRIGW=, |} ${7|INT,STRING,REAL|} ${0:VariableName}"
 	   ],
-	   "description": "CODE-acnu"
+	   "description": "Declare a variable with full options"
+	},
+	"acnu-declare-local":
+	{
+	   "prefix": "declarelocal",
+	   "body": [
+		   "DECLARE DEF=${1:DefValue} ${2|INT,STRING,REAL|} ${0:VariableName}"
+	   ],
+	   "description": "Declare a local variable"
+	},
+	"acnu-declare-global":
+	{
+	   "prefix": "declareglobal",
+	   "body": [
+		   "${1|DECLARE,PDECLARE|} ${2|GLOBAL,MGLOBAL,CGLOBAL|} ${3|NOREC,NOSHOW,SPIED, |} DEF=${4:DefValue} ${5|INT,STRING,REAL|} ${0:VariableName}"
+	   ],
+	   "description": "Declare a global variable"
 	},
 	"acnu-ARA-getvardim":
 	{
