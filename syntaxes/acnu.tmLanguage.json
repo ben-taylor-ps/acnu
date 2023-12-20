@@ -608,7 +608,13 @@
 					"include": "#else-keyword"
 				},
 				{
+					"include": "#macro-call"
+				},
+				{
 					"include": "#break-keyword"
+				},
+				{
+					"include": "#macro-endmacro"
 				},
 				{
 					"include": "#statements"
@@ -630,9 +636,6 @@
 				},
 				{
 					"include": "#struct"
-				},
-				{
-					"include": "#macro-call"
 				},
 				{
 					"include": "#variable"
