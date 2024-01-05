@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [1.0.16] - 2024-01-05
+
+### Added:
+
+If without brackets
+
+### Fixed:
+
+Array now works correctly
+Fixed some numbers displaying as identifiers instead
+
+
 ## [1.0.15] - 2023-12-21
 
 ### Added:
