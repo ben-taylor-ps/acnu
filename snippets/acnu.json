@@ -299,7 +299,7 @@
 	"acnu-cnst": {
 		"prefix": "cnst",
 		"body": [
-			"CNST(${1|ABS,CCLW,CLW,CORR_ITN,CORR_LX,CORR_LY,CORR_LZ,OFF,OFF_POS,ON|}"
+			"CNST(${1|ABS,CCLW,CLW,CORR_ITN,CORR_LX,CORR_LY,CORR_LZ,OFF,OFF_POS,ON|})"
 		],
 		"description": "Yields a predefined constant."
 	},
