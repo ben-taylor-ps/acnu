@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [1.0.15] - 2023-12-21
+
+### Added:
+
+Macro call inside start sub code
+Constant inside start sub code
+
+### Fixed:
+
+Macro call ordering, before it was sometimes overridden, inconsistent
+Constant keywords updated so that if the word is OFF_POS it matches the whole word and not part
+Allow declaration of a macro with a # in the name
+
+
 ## [1.0.12] - 2023-12-14
 
 ### Added:

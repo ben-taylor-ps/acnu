@@ -82,11 +82,11 @@
 	   "prefix": "Macro",
 	   "body": [
 		   "Macro=${TM_SELECTED_TEXT:${1:MyCode}}()${2|\\,OVERW,\\,FAST,\\,DEBUG,\\,GENERIC_ARGS|}",
-		   "# Begin of Specific MACRO - ${1}",
-		   "# Macro creation by ${2:Name} $CURRENT_DATE $CURRENT_MONTH_NAME_SHORT $CURRENT_YEAR ==>",
-		   "# Macro review   by                   XX XXX XXXX",
+		   "\t# Begin of Specific MACRO - ${1}",
+		   "\t# Macro creation by ${3:Name} $CURRENT_DATE $CURRENT_MONTH_NAME_SHORT $CURRENT_YEAR ==>",
+		   "\t# Macro review   by                   XX XXX XXXX",
 		   "\n${0:\n}\n",
-		   "# End of Specific MACRO - ${1}",
+		   "\t# End of Specific MACRO - ${1}",
 		   "ENDMACRO"
 	   ],
 	   "description": "Creation of a macro"
