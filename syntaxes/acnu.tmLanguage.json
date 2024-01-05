@@ -162,6 +162,9 @@
 				"include":"#data-types"
 			},
 			{
+				"include":"#constant"
+			},
+			{
 				"include": "#operators-arithmetic"
 			},
 			{
@@ -190,6 +193,9 @@
 				},
 				{
 					"include":"#data-types"
+				},
+				{
+					"include": "#constant"
 				},
 				{
 					"include": "#comma"
@@ -232,6 +238,9 @@
 						},
 						{
 							"include":"#data-types"
+						},
+						{
+							"include":"#constant"
 						},
 						{
 							"include": "#operators-arithmetic"
@@ -551,6 +560,9 @@
 		"statement-brackets": {
 			"patterns": [
 				{
+					"include": "#constant"
+				},
+				{
 					"include": "#macro-call"
 				},
 				{
@@ -568,7 +580,6 @@
 				{
 					"include": "#struct"
 				},
-
 				{
 					"include": "#variable"
 				}
@@ -580,9 +591,6 @@
 				},
 				{
 					"include": "#statements"
-				},
-				{
-					"include": "#macro-call"
 				},
 				{
 					"include": "#data-types"
@@ -649,9 +657,6 @@
 				},
 				{
 					"include": "#struct"
-				},
-				{
-					"include": "#macro-call"
 				},
 				{
 					"include": "#macro-endmacro"
