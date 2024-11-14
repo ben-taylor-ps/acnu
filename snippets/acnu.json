@@ -81,7 +81,7 @@
 	{
 	   "prefix": "Macro",
 	   "body": [
-		   "Macro=${TM_SELECTED_TEXT:${1:MyCode}}()${2|\\,OVERW,\\,FAST,\\,DEBUG,\\,GENERIC_ARGS|}",
+		   "Macro=${TM_SELECTED_TEXT:${1:MyCode}}()${2|\\,OVERW,\\,FAST,\\,APPEND,\\,DEBUG,\\,GENERIC_ARGS|}",
 		   "\t# Begin of Specific MACRO - ${1}",
 		   "\t# Macro creation by ${3:Name} $CURRENT_DATE $CURRENT_MONTH_NAME_SHORT $CURRENT_YEAR ==>",
 		   "\t# Macro review   by                   XX XXX XXXX",
